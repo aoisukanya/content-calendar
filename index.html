@@ -360,6 +360,7 @@ function switchTab(tab){
   document.getElementById('tnav-dash').classList[tab==='dashboard'?'add':'remove']('active');
   document.getElementById('tnav-cal').classList[tab==='calendar'?'add':'remove']('active');
   document.querySelectorAll('.sb-item').forEach((el,i)=>{el.classList.remove('active');if((tab==='dashboard'&&i===0)||(tab==='calendar'&&i===1))el.classList.add('active')});
+  if(tab==='calendar') render();
 }
 
 async function apiCall(method,body){
