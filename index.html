@@ -162,6 +162,16 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rpill.pub{background:#e6faf3;color:#0a7a54}
 .rpill.sched{background:#fef3e2;color:#9a5a00}
 .rpill.draft{background:#f1f1f1;color:#888}
+
+.plat-checks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:2px}
+.pcheck{cursor:pointer}
+.pcheck input{display:none}
+.pcheck-box{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:7px 10px;border-radius:9px;border:1.5px solid var(--border);transition:all .15s;user-select:none}
+.pcheck input:checked+.pcheck-box{border-width:2px}
+.pcheck-box.yt{background:var(--yt-bg);color:var(--yt)}.pcheck input:checked+.pcheck-box.yt{border-color:var(--yt)}
+.pcheck-box.ig{background:var(--ig-bg);color:var(--ig)}.pcheck input:checked+.pcheck-box.ig{border-color:var(--ig)}
+.pcheck-box.tk{background:var(--tk-bg);color:var(--tk)}.pcheck input:checked+.pcheck-box.tk{border-color:#555}
+.pcheck-box.fb{background:var(--fb-bg);color:var(--fb)}.pcheck input:checked+.pcheck-box.fb{border-color:var(--fb)}
 </style>
 </head>
 <body>
@@ -318,13 +328,16 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
   <div class="modal">
     <div class="modal-hdr"><div class="modal-ico">📅</div><div class="modal-title" id="modal-title">เพิ่มคอนเทนต์</div></div>
     <div class="fg"><label class="flbl">ชื่อคอนเทนต์</label><input type="text" id="f-name" placeholder="เช่น รีวิวกล้อง, How-to..."></div>
-    <div class="frow">
-      <div class="fg"><label class="flbl">Platform</label>
-        <select id="f-platform"><option value="yt">▶ YouTube</option><option value="ig">◈ Instagram</option><option value="tk">♪ TikTok</option><option value="fb">f Facebook</option></select>
+    <div class="fg"><label class="flbl">Platform</label>
+      <div class="plat-checks" id="f-platforms">
+        <label class="pcheck"><input type="checkbox" value="yt"><span class="pcheck-box yt">▶ YouTube</span></label>
+        <label class="pcheck"><input type="checkbox" value="ig"><span class="pcheck-box ig">◈ Instagram</span></label>
+        <label class="pcheck"><input type="checkbox" value="tk"><span class="pcheck-box tk">♪ TikTok</span></label>
+        <label class="pcheck"><input type="checkbox" value="fb"><span class="pcheck-box fb">f Facebook</span></label>
       </div>
-      <div class="fg"><label class="flbl">สถานะ</label>
-        <select id="f-status"><option value="pub">เผยแพร่แล้ว</option><option value="sched">กำหนดโพสต์</option><option value="draft">ร่าง</option></select>
-      </div>
+    </div>
+    <div class="fg"><label class="flbl">สถานะ</label>
+      <select id="f-status"><option value="pub">เผยแพร่แล้ว</option><option value="sched">กำหนดโพสต์</option><option value="draft">ร่าง</option></select>
     </div>
     <div class="fg"><label class="flbl">วันที่โพสต์</label><input type="date" id="f-date"></div>
     <div class="fg"><label class="flbl">โน้ต / ไอเดีย</label><textarea id="f-note" placeholder="caption, hashtag, ไอเดียเนื้อหา..."></textarea></div>
@@ -338,7 +351,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbx3E1wTPouiAGELlXbKvj4q53RiNkoIF_x99aAUInsfIKcpAzsLK2CvbptrbJ-_CyIY/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbykSNzBkFgbphMGVjyn2ZQvU6XwjDKe2mh_cV6rgulD_RjfWvQ9WuvkaJ8y_G5fwnZa/exec';
 const MONTHS=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 const PLAT={yt:{icon:'▶',label:'YouTube',bg:'#fff0f0',cl:'#ff4444'},ig:{icon:'◈',label:'Instagram',bg:'#fff0f8',cl:'#d62976'},tk:{icon:'♪',label:'TikTok',bg:'#f2f2f2',cl:'#555'},fb:{icon:'f',label:'Facebook',bg:'#eef4ff',cl:'#1877f2'}};
 const SLBL={pub:'เผยแพร่แล้ว',sched:'กำหนดโพสต์',draft:'ร่าง'};
@@ -504,14 +517,14 @@ function render(){
 
 function openAdd(ds){
   editId=null;document.getElementById('modal-title').textContent='เพิ่มคอนเทนต์';
-  document.getElementById('f-name').value='';document.getElementById('f-platform').value='yt';
+  document.getElementById('f-name').value='';document.querySelectorAll('#f-platforms input').forEach(cb=>cb.checked=false);document.querySelector('#f-platforms input[value="yt"]').checked=true;
   document.getElementById('f-date').value=ds||fmt(today);document.getElementById('f-status').value='sched';
   document.getElementById('f-note').value='';document.getElementById('delete-btn').style.display='none';
   document.getElementById('overlay').classList.add('open');setTimeout(()=>document.getElementById('f-name').focus(),100);
 }
 function openEdit(post){
   editId=post.id;document.getElementById('modal-title').textContent='แก้ไขคอนเทนต์';
-  document.getElementById('f-name').value=post.name;document.getElementById('f-platform').value=post.platform;
+  document.getElementById('f-name').value=post.name;const pts=post.platform?post.platform.split(','):[];document.querySelectorAll('#f-platforms input').forEach(cb=>{cb.checked=pts.includes(cb.value);});
   document.getElementById('f-date').value=post.date;document.getElementById('f-status').value=post.status;
   document.getElementById('f-note').value=post.note||'';document.getElementById('delete-btn').style.display='inline-flex';
   document.getElementById('overlay').classList.add('open');
@@ -523,7 +536,9 @@ async function savePost(){
   if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return}
   // FIX 5: normalize วันที่ก่อนส่งไป Sheets
   const cleanDate=normalizeDate(document.getElementById('f-date').value);
-  const post={name,platform:document.getElementById('f-platform').value,date:cleanDate,status:document.getElementById('f-status').value,note:document.getElementById('f-note').value.trim()};
+  const selPlats=[...document.querySelectorAll('#f-platforms input:checked')].map(cb=>cb.value);
+  if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return}
+  const post={name,platform:selPlats.join(','),date:cleanDate,status:document.getElementById('f-status').value,note:document.getElementById('f-note').value.trim()};
   const btn=document.getElementById('save-btn');btn.textContent='บันทึก...';btn.disabled=true;
   const result=editId?await apiCall('POST',{action:'updatePost',id:editId,post}):await apiCall('POST',{action:'addPost',post});
   btn.textContent='บันทึก';btn.disabled=false;
