@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Calendar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --border: #E8E6DF;
+  --text: #1A1916;
+  --muted: #8C8A84;
+  --accent: #3D3BE0;
+  --accent-light: #EEEEFF;
+  --yt: #FF4B26;
+  --yt-bg: #FFF0ED;
+  --ig: #C5318A;
+  --ig-bg: #FDF0F8;
+  --tk: #1A56E8;
+  --tk-bg: #EEF3FF;
+  --li: #1D7A4F;
+  --li-bg: #EBF7F2;
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* Layout */
+.app { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+.logo { font-size: 15px; font-weight: 500; letter-spacing: -.2px; }
+.logo span { color: var(--accent); }
+.header-right { display: flex; gap: 10px; align-items: center; }
+
+/* Buttons */
+button { font-family: 'DM Sans', sans-serif; cursor: pointer; }
+.btn { padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: all .15s; }
+.btn:hover { border-color: #ccc; background: #fafafa; }
+.btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-accent:hover { background: #2e2cc0; border-color: #2e2cc0; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--muted); }
+.btn-ghost:hover { background: var(--bg); color: var(--text); }
+.btn-danger { color: #c0392b; border-color: #f5c6c6; background: #fff5f5; }
+.btn-danger:hover { background: #ffe8e8; }
+.icon-btn { width: 32px; height: 32px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 16px; transition: all .15s; }
+.icon-btn:hover { border-color: #ccc; color: var(--text); }
+
+/* Filters */
+.toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 10px; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-btn { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: var(--surface); color: var(--muted); transition: all .15s; }
+.filter-btn:hover { border-color: #bbb; color: var(--text); }
+.filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+.nav-row { display: flex; align-items: center; gap: 10px; }
+.month-label { font-size: 15px; font-weight: 500; min-width: 170px; text-align: center; }
+
+/* Calendar grid */
+.cal-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.day-headers { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border); }
+.day-hdr { font-size: 11px; font-weight: 500; color: var(--muted); text-align: center; padding: 10px 0; letter-spacing: .5px; text-transform: uppercase; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.cell { min-height: 100px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 8px; position: relative; }
+.cell:nth-child(7n) { border-right: none; }
+.cell.other { background: #FAFAF8; }
+.cell.today { background: #FAFAFF; }
+.cell.today .date-n { background: var(--accent); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+.date-n { font-size: 11px; font-weight: 500; color: var(--muted); margin-bottom: 5px; }
+.cell.other .date-n { opacity: .4; }
+
+/* Chips */
+.chip { display: block; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; margin-bottom: 3px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: none; text-align: left; width: 100%; transition: opacity .12s; }
+.chip:hover { opacity: .8; }
+.chip.yt { background: var(--yt-bg); color: var(--yt); }
+.chip.ig { background: var(--ig-bg); color: var(--ig); }
+.chip.tk { background: var(--tk-bg); color: var(--tk); }
+.chip.li { background: var(--li-bg); color: var(--li); }
+.chip.draft { opacity: .55; border: 1px dashed currentColor; }
+.add-btn { display: flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 4px; border: 1px dashed var(--border); background: transparent; color: var(--muted); font-size: 13px; cursor: pointer; margin-top: 3px; transition: all .15s; line-height: 1; }
+.add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+/* Legend */
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); align-items: center; }
+.leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* Status indicator */
+.status-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-top: .75rem; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.status-dot.connected { background: #27ae60; }
+.status-dot.error { background: #e74c3c; }
+.status-dot.loading { background: #f39c12; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* Toast */
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: #fff; font-size: 13px; padding: 10px 18px; border-radius: var(--radius-sm); opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; z-index: 999; }
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* Modal overlay */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(20,20,18,.45); z-index: 100; align-items: center; justify-content: center; }
+.overlay.open { display: flex; }
+.modal { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 1.5rem; width: 360px; max-width: calc(100vw - 2rem); }
+.modal-title { font-size: 15px; font-weight: 500; margin-bottom: 1.25rem; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 5px; display: block; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; font-family: 'DM Sans', sans-serif; font-size: 13px;
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); color: var(--text); outline: none; transition: border-color .15s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea { height: 60px; resize: vertical; }
+.modal-actions { display: flex; gap: 8px; justify-content: space-between; margin-top: 1.25rem; }
+.modal-actions-right { display: flex; gap: 8px; }
+
+/* Spinner */
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Setup banner */
+.setup-banner { background: #fffbe6; border: 1px solid #f0d060; border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: #7a5c00; display: flex; gap: 10px; align-items: flex-start; }
+.setup-banner strong { display: block; margin-bottom: 4px; font-size: 14px; }
+.setup-banner code { font-family: 'DM Mono', monospace; font-size: 12px; background: rgba(0,0,0,.07); padding: 1px 5px; border-radius: 3px; word-break: break-all; }
+
+/* Config area */
+.config-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; }
+.config-box h3 { font-size: 14px; font-weight: 500; margin-bottom: .75rem; }
+.config-row { display: flex; gap: 8px; }
+.config-row input { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); outline: none; }
+.config-row input:focus { border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">content <span>calendar</span></div>
+    <div class="header-right">
+      <button class="btn btn-accent" id="add-btn">+ เพิ่มคอนเทนต์</button>
+    </div>
+  </header>
+
+  <!-- Setup banner (hidden after config) -->
+  <div class="setup-banner" id="setup-banner">
+    <div>⚙️</div>
+    <div>
+      <strong>ตั้งค่า Google Sheets ก่อนใช้งาน</strong>
+      ใส่ URL ของ Google Apps Script Web App ด้านล่าง แล้วกด "เชื่อมต่อ"<br>
+      ยังไม่มี URL? ดูคำแนะนำใน <code>SETUP_GUIDE.md</code>
+    </div>
+  </div>
+
+  <div class="config-box" id="config-box">
+    <h3>🔗 เชื่อมต่อ Google Sheets</h3>
+    <div class="config-row">
+      <input type="url" id="api-url" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
+      <button class="btn btn-accent" id="connect-btn">เชื่อมต่อ</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-p="all">ทั้งหมด</button>
+      <button class="filter-btn" data-p="yt">▶ YouTube</button>
+      <button class="filter-btn" data-p="ig">◈ Instagram</button>
+      <button class="filter-btn" data-p="tk">♪ TikTok</button>
+      <button class="filter-btn" data-p="li">in LinkedIn</button>
+    </div>
+    <div class="nav-row">
+      <button class="icon-btn" id="prev">&#8249;</button>
+      <span class="month-label" id="month-label"></span>
+      <button class="icon-btn" id="next">&#8250;</button>
+    </div>
+  </div>
+
+  <div class="cal-wrap">
+    <div class="day-headers">
+      <div class="day-hdr">อา</div><div class="day-hdr">จ</div><div class="day-hdr">อ</div>
+      <div class="day-hdr">พ</div><div class="day-hdr">พฤ</div><div class="day-hdr">ศ</div><div class="day-hdr">ส</div>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--yt-bg);border:1px solid var(--yt)"></div>YouTube</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--ig-bg);border:1px solid var(--ig)"></div>Instagram</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--tk-bg);border:1px solid var(--tk)"></div>TikTok</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--li-bg);border:1px solid var(--li)"></div>LinkedIn</div>
+    <div class="leg" style="opacity:.6"><div class="leg-dot" style="background:#f5f5f5;border:1px dashed #aaa"></div>ร่าง</div>
+    <div style="margin-left:auto" class="status-bar">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="status-text">ยังไม่ได้เชื่อมต่อ</span>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">เพิ่มคอนเทนต์</div>
+    <div class="form-group">
+      <label class="form-label">ชื่อคอนเทนต์ *</label>
+      <input type="text" id="f-name" placeholder="เช่น รีวิวกล้อง Sony ZV-E10">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Platform *</label>
+      <select id="f-platform">
+        <option value="yt">YouTube</option>
+        <option value="ig">Instagram</option>
+        <option value="tk">TikTok</option>
+        <option value="li">LinkedIn</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">วันที่โพสต์ *</label>
+      <input type="date" id="f-date">
+    </div>
+    <div class="form-group">
+      <label class="form-label">สถานะ</label>
+      <select id="f-status">
+        <option value="pub">เผยแพร่แล้ว</option>
+        <option value="sched">กำหนดโพสต์</option>
+        <option value="draft">ร่าง</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">โน้ต (ไม่บังคับ)</label>
+      <textarea id="f-note" placeholder="ไอเดีย, caption, hashtag..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-danger" id="delete-btn" style="display:none">ลบ</button>
+      <div class="modal-actions-right">
+        <button class="btn btn-ghost" id="cancel-btn">ยกเลิก</button>
+        <button class="btn btn-accent" id="save-btn">บันทึก</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const MONTHS_TH = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+
+let apiUrl = localStorage.getItem('cal_api_url') || '';
+let posts = [];
+let cur = new Date();
+cur.setDate(1);
+let filter = 'all';
+let editId = null;
+const today = new Date();
+
+function fmt(d) { return d.toISOString().split('T')[0]; }
+function toast(msg, dur=2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
+function setStatus(state, msg) {
+  const dot = document.getElementById('status-dot');
+  document.getElementById('status-text').textContent = msg;
+  dot.className = 'status-dot' + (state ? ' ' + state : '');
+}
+
+async function api(method, body) {
+  if (!apiUrl) { toast('⚠️ ยังไม่ได้เชื่อมต่อ Sheets'); return null; }
+  try {
+    setStatus('loading', 'กำลังโหลด...');
+    let res;
+    if (method === 'GET') {
+      res = await fetch(apiUrl + '?action=getPosts');
+    } else {
+      res = await fetch(apiUrl, { method: 'POST', body: JSON.stringify(body) });
+    }
+    const data = await res.json();
+    setStatus('connected', 'เชื่อมต่อแล้ว ✓');
+    return data;
+  } catch(e) {
+    setStatus('error', 'เชื่อมต่อไม่ได้');
+    toast('❌ เชื่อมต่อ Sheets ไม่ได้ ลองใหม่อีกครั้ง');
+    return null;
+  }
+}
+
+async function loadPosts() {
+  const data = await api('GET');
+  if (data && data.posts) { posts = data.posts; render(); }
+}
+
+async function savePost() {
+  const btn = document.getElementById('save-btn');
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { toast('กรุณาใส่ชื่อคอนเทนต์'); return; }
+  const post = {
+    name, platform: document.getElementById('f-platform').value,
+    date: document.getElementById('f-date').value,
+    status: document.getElementById('f-status').value,
+    note: document.getElementById('f-note').value.trim()
+  };
+  btn.innerHTML = '<span class="spinner"></span>';
+  btn.disabled = true;
+  let result;
+  if (editId) {
+    result = await api('POST', { action: 'updatePost', id: editId, post });
+  } else {
+    result = await api('POST', { action: 'addPost', post });
+  }
+  btn.innerHTML = 'บันทึก'; btn.disabled = false;
+  if (result && result.success) {
+    closeModal();
+    toast(editId ? '✓ แก้ไขแล้ว' : '✓ เพิ่มแล้ว');
+    await loadPosts();
+  }
+}
+
+async function deletePost() {
+  if (!editId) return;
+  if (!confirm('ลบคอนเทนต์นี้?')) return;
+  const result = await api('POST', { action: 'deletePost', id: editId });
+  if (result && result.success) {
+    closeModal(); toast('ลบแล้ว'); await loadPosts();
+  }
+}
+
+function openAdd(ds) {
+  editId = null;
+  document.getElementById('modal-title').textContent = 'เพิ่มคอนเทนต์';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-platform').value = 'yt';
+  document.getElementById('f-date').value = ds || fmt(today);
+  document.getElementById('f-status').value = 'sched';
+  document.getElementById('f-note').value = '';
+  document.getElementById('delete-btn').style.display = 'none';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function openEdit(post) {
+  editId = post.id;
+  document.getElementById('modal-title').textContent = 'แก้ไขคอนเทนต์';
+  document.getElementById('f-name').value = post.name;
+  document.getElementById('f-platform').value = post.platform;
+  document.getElementById('f-date').value = post.date;
+  document.getElementById('f-status').value = post.status;
+  document.getElementById('f-note').value = post.note || '';
+  document.getElementById('delete-btn').style.display = 'inline-flex';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+
+function render() {
+  document.getElementById('month-label').textContent = MONTHS_TH[cur.getMonth()] + ' ' + (cur.getFullYear() + 543);
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+  const first = new Date(cur.getFullYear(), cur.getMonth(), 1);
+  const last = new Date(cur.getFullYear(), cur.getMonth() + 1, 0);
+  let start = new Date(first);
+  start.setDate(start.getDate() - first.getDay());
+  let end = new Date(last);
+  end.setDate(end.getDate() + (6 - last.getDay()));
+  let d = new Date(start);
+  while (d <= end) {
+    const cell = document.createElement('div');
+    const isOther = d.getMonth() !== cur.getMonth();
+    const isToday = fmt(d) === fmt(today);
+    cell.className = 'cell' + (isOther ? ' other' : '') + (isToday ? ' today' : '');
+    const ds = fmt(d);
+    const dn = document.createElement('div');
+    dn.className = 'date-n';
+    dn.textContent = d.getDate();
+    cell.appendChild(dn);
+    const dp = posts.filter(p => (filter === 'all' || p.platform === filter) && p.date === ds);
+    dp.forEach(p => {
+      const chip = document.createElement('button');
+      chip.className = 'chip ' + p.platform + (p.status === 'draft' ? ' draft' : '');
+      chip.textContent = p.name;
+      chip.title = p.note || p.name;
+      chip.onclick = e => { e.stopPropagation(); openEdit(p); };
+      cell.appendChild(chip);
+    });
+    const addB = document.createElement('button');
+    addB.className = 'add-btn'; addB.innerHTML = '+';
+    addB.onclick = e => { e.stopPropagation(); openAdd(ds); };
+    cell.appendChild(addB);
+    grid.appendChild(cell);
+    d.setDate(d.getDate() + 1);
+  }
+}
+
+// Init config
+if (apiUrl) {
+  document.getElementById('api-url').value = apiUrl;
+  document.getElementById('config-box').style.display = 'none';
+  document.getElementById('setup-banner').style.display = 'none';
+  loadPosts();
+} else {
+  render();
+}
+
+document.getElementById('connect-btn').onclick = async () => {
+  const url = document.getElementById('api-url').value.trim();
+  if (!url) return;
+  apiUrl = url;
+  localStorage.setItem('cal_api_url', url);
+  document.getElementById('config-box').style.display = 'none';
+  document.getElementById('setup-banner').style.display = 'none';
+  toast('กำลังทดสอบการเชื่อมต่อ...');
+  await loadPosts();
+};
+
+document.getElementById('add-btn').onclick = () => openAdd(fmt(today));
+document.getElementById('save-btn').onclick = savePost;
+document.getElementById('cancel-btn').onclick = closeModal;
+document.getElementById('delete-btn').onclick = deletePost;
+document.getElementById('overlay').onclick = e => { if (e.target === e.currentTarget) closeModal(); };
+document.getElementById('prev').onclick = () => { cur.setMonth(cur.getMonth() - 1); render(); };
+document.getElementById('next').onclick = () => { cur.setMonth(cur.getMonth() + 1); render(); };
+document.getElementById('filters').querySelectorAll('.filter-btn').forEach(btn => {
+  btn.onclick = () => {
+    filter = btn.dataset.p;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  };
+});
+</script>
+</body>
+</html>
