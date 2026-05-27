@@ -349,7 +349,12 @@ const today=new Date();cur.setDate(1);
 const wk=Math.ceil(((today-new Date(today.getFullYear(),0,1))/86400000+new Date(today.getFullYear(),0,1).getDay()+1)/7);
 document.getElementById('date-pill').textContent='📅 '+today.getDate()+' '+MONTHS[today.getMonth()]+' '+(today.getFullYear()+543)+' · สัปดาห์ที่ '+wk;
 
-function fmt(d){return d.toISOString().split('T')[0]}
+function fmt(d){
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+day;
+}
 function toast(m,dur=2500){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur)}
 function setStatus(s,m){document.getElementById('sdot').className='sdot'+(s?' '+s:'');document.getElementById('stext').textContent=m}
 function showLoading(v){document.getElementById('loading').classList[v?'add':'remove']('show')}
