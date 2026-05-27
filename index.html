@@ -330,10 +330,10 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
     <div class="fg"><label class="flbl">ชื่อคอนเทนต์</label><input type="text" id="f-name" placeholder="เช่น รีวิวกล้อง, How-to..."></div>
     <div class="fg"><label class="flbl">Platform</label>
       <div class="plat-checks" id="f-platforms">
-        <label class="pcheck"><input type="checkbox" value="yt"><span class="pcheck-box yt">▶ YouTube</span></label>
-        <label class="pcheck"><input type="checkbox" value="ig"><span class="pcheck-box ig">◈ Instagram</span></label>
-        <label class="pcheck"><input type="checkbox" value="tk"><span class="pcheck-box tk">♪ TikTok</span></label>
-        <label class="pcheck"><input type="checkbox" value="fb"><span class="pcheck-box fb">f Facebook</span></label>
+        <label class="pcheck"><input type="checkbox" value="yt"><span class="pcheck-box yt"><img src="yt.png" style="width:16px;height:16px;object-fit:contain"> YouTube</span></label>
+        <label class="pcheck"><input type="checkbox" value="ig"><span class="pcheck-box ig"><img src="ig.png" style="width:16px;height:16px;object-fit:contain"> Instagram</span></label>
+        <label class="pcheck"><input type="checkbox" value="tk"><span class="pcheck-box tk"><img src="tt.png" style="width:16px;height:16px;object-fit:contain"> TikTok</span></label>
+        <label class="pcheck"><input type="checkbox" value="fb"><span class="pcheck-box fb"><img src="fb.png" style="width:16px;height:16px;object-fit:contain"> Facebook</span></label>
       </div>
     </div>
     <div class="fg"><label class="flbl">สถานะ</label>
@@ -353,7 +353,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 <script>
 const API_URL='https://script.google.com/macros/s/AKfycbykSNzBkFgbphMGVjyn2ZQvU6XwjDKe2mh_cV6rgulD_RjfWvQ9WuvkaJ8y_G5fwnZa/exec';
 const MONTHS=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
-const PLAT={yt:{icon:'▶',label:'YouTube',bg:'#fff0f0',cl:'#ff4444'},ig:{icon:'◈',label:'Instagram',bg:'#fff0f8',cl:'#d62976'},tk:{icon:'♪',label:'TikTok',bg:'#f2f2f2',cl:'#555'},fb:{icon:'f',label:'Facebook',bg:'#eef4ff',cl:'#1877f2'}};
+const PLAT={yt:{icon:'<img src="yt.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">',label:'YouTube',bg:'#fff0f0',cl:'#ff4444'},ig:{icon:'<img src="ig.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">',label:'Instagram',bg:'#fff0f8',cl:'#d62976'},tk:{icon:'<img src="tt.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">',label:'TikTok',bg:'#f2f2f2',cl:'#555'},fb:{icon:'<img src="fb.png" style="width:14px;height:14px;object-fit:contain;vertical-align:middle">',label:'Facebook',bg:'#eef4ff',cl:'#1877f2'}};
 const SLBL={pub:'เผยแพร่แล้ว',sched:'กำหนดโพสต์',draft:'ร่าง'};
 const SPILL={pub:'pub',sched:'sched',draft:'draft'};
 let posts=[],cur=new Date(),filter='all',editId=null;
@@ -505,8 +505,8 @@ function render(){
     const dn=document.createElement('div');dn.className='dnum';dn.textContent=d.getDate();cell.appendChild(dn);
     posts.filter(p=>(filter==='all'||p.platform===filter)&&p.date===ds).forEach(p=>{
       const chip=document.createElement('button');
-      chip.className='chip '+(p.platform||'fb')+(p.status==='draft'?' draft':'');
-      chip.textContent=(PLAT[p.platform]?.icon||'·')+' '+p.name;chip.title=p.note||p.name;
+      const firstPlat=(p.platform||'fb').split(',')[0];chip.className='chip '+firstPlat+(p.status==='draft'?' draft':'');
+      const platList=p.platform?p.platform.split(','):['fb'];chip.innerHTML=platList.map(pl=>PLAT[pl]?.icon||'·').join('')+' '+p.name;chip.title=p.note||p.name;
       chip.onclick=e=>{e.stopPropagation();openEdit(p)};cell.appendChild(chip);
     });
     const ab=document.createElement('button');ab.className='add-cell';ab.textContent='+';
