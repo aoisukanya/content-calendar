@@ -535,7 +535,7 @@ async function savePost(){
   const name=document.getElementById('f-name').value.trim();
   if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return}
   // FIX 5: normalize วันที่ก่อนส่งไป Sheets
-  const cleanDate=normalizeDate(document.getElementById('f-date').value);
+  const cleanDate=document.getElementById('f-date').value;
   const selPlats=[...document.querySelectorAll('#f-platforms input:checked')].map(cb=>cb.value);
   if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return}
   const post={name,platform:selPlats.join(','),date:cleanDate,status:document.getElementById('f-status').value,note:document.getElementById('f-note').value.trim()};
