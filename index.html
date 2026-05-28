@@ -110,14 +110,14 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .cell.today{background:var(--accent-l)}
 .cell.today .dnum{background:var(--accent);color:#fff;border-radius:5px;width:20px;height:20px;display:flex;align-items:center;justify-content:center}
 .dnum{font-size:11px;font-weight:500;color:var(--muted);margin-bottom:4px;line-height:1}
-.chip{display:flex;align-items:center;gap:3px;font-size:10px;font-weight:500;padding:3px 6px;border-radius:5px;margin-bottom:3px;cursor:pointer;border:none;text-align:left;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;transition:opacity .12s;flex-wrap:nowrap}
+.chip{display:flex;flex-direction:column;gap:2px;font-size:10px;font-weight:500;padding:4px 6px;border-radius:5px;margin-bottom:3px;cursor:pointer;border:none;text-align:left;width:100%;overflow:hidden;transition:opacity .12s}
 .chip:hover{opacity:.72}
 .chip.fb{background:var(--fb-bg);color:var(--fb);border:1px solid #bad1fb}
 .chip.tk{background:var(--tk-bg);color:var(--tk);border:1px solid #d5d5d5}
 .chip.yt{background:var(--yt-bg);color:var(--yt);border:1px solid #ffd0ce}
 .chip.ig{background:var(--ig-bg);color:var(--ig);border:1px solid #f9c0de}
 .chip.draft{opacity:.45;border-style:dashed}
-.chip-name{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.chip-row1{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-row2{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-name{overflow:hidden;text-overflow:ellipsis;font-size:10px;font-weight:500}
 .chip-tag{font-size:9px;padding:1px 4px;border-radius:3px;flex-shrink:0;opacity:.8}
 .chip.fb .chip-tag{background:#dbe8fe;color:#1877f2}
 .chip.tk .chip-tag{background:#e5e5e5;color:#555}
@@ -176,6 +176,16 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rpill.pub{background:#e6faf3;color:#0a7a54}
 .rpill.sched{background:#fef3e2;color:#9a5a00}
 .rpill.draft{background:#f1f1f1;color:#888}
+.task{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:4px 0}
+.tbox{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
+.tbox.done{background:#e6faf3;border-color:var(--up);color:var(--up)}
+.task.done .tlabel{text-decoration:line-through;color:var(--muted)}
+.task-info{flex:1;min-width:0}
+.tlabel{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tdeadline{font-size:10px;color:var(--muted)}
+.tdeadline.overdue{color:var(--down)}
+.tdel{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px;opacity:0;transition:opacity .15s}
+.task:hover .tdel{opacity:1}
 </style>
 </head>
 <body>
@@ -276,14 +286,9 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
           </div>
         </div>
         <div class="card">
-          <div class="task-hdr"><span class="card-title">งานที่ต้องทำ</span><span style="font-size:11px;color:var(--muted)" id="task-count">2/5 เสร็จแล้ว</span></div>
-          <div class="task-list">
-            <div class="task done" onclick="toggleTask(this)"><div class="tbox done">✓</div><span class="tlabel">ตัดต่อ vlog สัปดาห์นี้</span></div>
-            <div class="task done" onclick="toggleTask(this)"><div class="tbox done">✓</div><span class="tlabel">อัปโหลด thumbnail YouTube</span></div>
-            <div class="task" onclick="toggleTask(this)"><div class="tbox"></div><span class="tlabel">เขียน caption Instagram</span></div>
-            <div class="task" onclick="toggleTask(this)"><div class="tbox"></div><span class="tlabel">ตอบ comment ทุก platform</span></div>
-            <div class="task" onclick="toggleTask(this)"><div class="tbox"></div><span class="tlabel">ส่ง brief ให้สปอนเซอร์</span></div>
-          </div>
+          <div class="task-hdr"><span class="card-title">งานที่ต้องทำ</span><span style="font-size:11px;color:var(--muted)" id="task-count"></span></div>
+          <div class="task-list" id="task-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">กำลังโหลด...</div></div>
+          <button onclick="openAddTask()" style="margin-top:8px;width:100%;padding:6px;border-radius:8px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
         </div>
       </div>
     </div>
@@ -365,7 +370,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbxQK5rXfWS3qoiPCUNrOkSbz7hUVH0lm3k-GC4XjZz9i2FwmuWxnyYOd-6e4xmTlnMu/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbx3E1wTPouiAGELIXbKvj4q53RiNkoIF_x99aAUInsfIKcpAzsLK2CvbptrbJ-_CylY/exec';
 const MONTHS=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
 const PLAT={
   fb:{icon:'<img src="fb.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle">',label:'Facebook',bg:'#eef4ff',cl:'#1877f2'},
@@ -404,8 +409,13 @@ function switchTab(tab){
 }
 
 async function apiCall(method,body){
-  try{const res=method==='GET'?await fetch(API_URL+'?action=getPosts'):await fetch(API_URL,{method:'POST',body:JSON.stringify(body)});return await res.json()}
-  catch(e){setStatus('err','เชื่อมต่อไม่ได้');toast('❌ เชื่อมต่อ Sheets ไม่ได้');return null}
+  try{
+    let res;
+    if(method==='GET') res=await fetch(API_URL+'?action=getPosts');
+    else if(method==='GET_TASKS') res=await fetch(API_URL+'?action=getTasks');
+    else res=await fetch(API_URL,{method:'POST',body:JSON.stringify(body)});
+    return await res.json();
+  }catch(e){setStatus('err','เชื่อมต่อไม่ได้');toast('❌ เชื่อมต่อ Sheets ไม่ได้');return null}
 }
 
 async function loadPosts(){
@@ -479,11 +489,69 @@ new Chart(document.getElementById('barChart'),{
     +items.map((it,i)=>{const pl=PLAT[it.plat]||PLAT.fb;return`<div class="rank-cell"><span class="rank-num" style="color:${rankColors[i]}">${it.rank}</span></div><div class="rank-cell"><div class="rank-plat" style="background:${pl.bg}">${pl.icon}</div></div><div class="rank-cell"><span class="rank-title">${it.title}</span></div><div class="rank-cell rank-val">${it.views}</div><div class="rank-cell rank-eng">${it.eng}</div><div class="rank-cell rank-date">${it.days}</div>`;}).join('')+'</div>';
 })();
 
+let tasks=[];
+
+async function loadTasks(){
+  const data=await apiCall('GET_TASKS');
+  if(data&&data.tasks){tasks=data.tasks;renderTasks()}
+}
+
+function renderTasks(){
+  const list=document.getElementById('task-list');
+  const today=fmt(new Date());
+  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">ยังไม่มีงาน</div>';updateTaskCount();return}
+  list.innerHTML=tasks.map(t=>{
+    const done=t.done==='true';
+    const overdue=t.deadline&&t.deadline<today&&!done;
+    return`<div class="task${done?' done':''}" style="display:flex;align-items:center;gap:8px;padding:4px 0">
+      <div class="tbox${done?' done':''}" onclick="toggleTaskDone('${t.id}','${t.done}')" style="flex-shrink:0">${done?'✓':''}</div>
+      <div style="flex:1;min-width:0">
+        <div class="tlabel${done?' done':''}" style="font-size:12px;${done?'text-decoration:line-through;color:var(--muted)':''}">${t.name}</div>
+        ${t.deadline?`<div style="font-size:10px;color:${overdue?'var(--down)':'var(--muted)'}">📅 ${t.deadline}${overdue?' (เกินกำหนด)':''}</div>`:''}
+      </div>
+      <button onclick="deleteTaskItem('${t.id}')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;opacity:.5">✕</button>
+    </div>`;
+  }).join('');
+  updateTaskCount();
+}
+
+function updateTaskCount(){
+  const done=tasks.filter(t=>t.done==='true').length;
+  document.getElementById('task-count').textContent=tasks.length?done+'/'+tasks.length+' เสร็จแล้ว':'';
+}
+
+async function toggleTaskDone(id, currentDone){
+  const task=tasks.find(t=>t.id===id);
+  if(!task) return;
+  task.done=currentDone==='true'?'false':'true';
+  renderTasks();
+  await apiCall('POST',{action:'updateTask',id,task});
+}
+
+async function deleteTaskItem(id){
+  if(!confirm('ลบงานนี้ใช่ไหม?')) return;
+  const result=await apiCall('POST',{action:'deleteTask',id});
+  if(result&&result.success){tasks=tasks.filter(t=>t.id!==id);renderTasks();toast('ลบงานแล้ว')}
+}
+
+function openAddTask(){
+  const name=prompt('ชื่องาน:');
+  if(!name) return;
+  const deadline=prompt('กำหนดส่ง (YYYY-MM-DD) หรือเว้นว่างได้:');
+  addTaskItem(name.trim(), deadline?deadline.trim():'');
+}
+
+async function addTaskItem(name, deadline){
+  const result=await apiCall('POST',{action:'addTask',task:{name,deadline,done:'false'}});
+  if(result&&result.success){
+    tasks.push({id:result.id,name,deadline,done:'false'});
+    renderTasks();toast('✓ เพิ่มงานแล้ว');
+  }
+}
+
 function toggleTask(el){
   el.classList.toggle('done');
   const box=el.querySelector('.tbox');box.classList.toggle('done');box.textContent=box.classList.contains('done')?'✓':'';
-  const done=document.querySelectorAll('.task.done').length,total=document.querySelectorAll('.task').length;
-  document.getElementById('task-count').textContent=done+'/'+total+' เสร็จแล้ว';
 }
 
 function render(){
@@ -508,7 +576,9 @@ function render(){
       const icons=(p.platform||'fb').split(',').map(pl2=>PLAT[pl2]?`<img src="${pl2==='tk'?'tt':pl2}.png" style="width:12px;height:12px;object-fit:contain;vertical-align:middle">`:'').join('');
       const typeTag=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
       const mediaTag=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
-      chip.innerHTML=`${icons}<span class="chip-name">${p.name}</span>${typeTag}${mediaTag}`;
+      const typeLabel=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
+      const mediaLabel=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
+      chip.innerHTML=`<div class="chip-row1">${icons}${typeLabel}</div><div class="chip-row2"><span class="chip-name">${p.name}</span>${mediaLabel}</div>`;
       chip.title=p.note||p.name;
       chip.onclick=e=>{e.stopPropagation();openEdit(p)};cell.appendChild(chip);
     });
@@ -589,6 +659,7 @@ document.getElementById('filters').querySelectorAll('.f-btn').forEach(btn=>{
 });
 
 loadPosts();
+loadTasks();
 </script>
 </body>
 </html>
