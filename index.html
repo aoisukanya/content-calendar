@@ -405,7 +405,7 @@ async function loadPosts(){
   const data=await apiCall('GET');showLoading(false);
   if(data&&data.posts){
     // FIX 4: normalize วันที่ทุก post ที่โหลดมา
-    posts=data.posts.map(p=>({...p,date:normalizeDate(p.date)}));
+posts=data.posts.map(p=>({...p,date:String(p.date).substring(0,10)}));
     setStatus('on','เชื่อมต่อแล้ว ✓');render();renderRecent();updateStats();
   }
   else setStatus('err','โหลดไม่สำเร็จ');
