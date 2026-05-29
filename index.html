@@ -569,8 +569,8 @@ async function apiCall(method,body){
     if(method==='GET') return await fetchJSONP(API_URL+'?action=getPosts');
     else if(method==='GET_TASKS') return await fetchJSONP(API_URL+'?action=getTasks');
     else{
-      const res=await fetch(API_URL,{method:'POST',body:JSON.stringify(body),headers:{'Content-Type':'text/plain'}});
-      return await res.json();
+   const res=await fetch(API_URL,{method:'POST',body:JSON.stringify(body),headers:{'Content-Type':'text/plain'}});
+return await res.json();
     }
   }catch(e){setStatus('err','เชื่อมต่อไม่ได้');toast('❌ เชื่อมต่อ Sheets ไม่ได้');return null}
 }
