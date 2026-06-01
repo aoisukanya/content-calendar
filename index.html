@@ -577,7 +577,10 @@ async function loadPosts(){
   const data=await apiCall('GET');showLoading(false);
   if(data&&data.posts){
     posts=data.posts.map(p=>({...p,date:String(p.date).substring(0,10)}));
-    setStatus('on','เชื่อมต่อแล้ว ✓');render();renderRecent();updateStats();
+    setStatus('on','เชื่อมต่อแล้ว ✓');
+    const calView=document.getElementById('view-calendar');
+    if(calView&&calView.style.display!=='none') render();
+    renderRecent();updateStats();
   } else setStatus('err','โหลดไม่สำเร็จ');
 }
 
@@ -864,7 +867,7 @@ async function savePost(){
   const result=editId?await apiCall('POST',{action:'updatePost',id:editId,post}):await apiCall('POST',{action:'addPost',post});
   btn.textContent='บันทึก';btn.disabled=false;
   closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');
-  setTimeout(()=>loadPosts(),1500);
+  setTimeout(async()=>{await loadPosts();render();},1500);
 }
 
 async function deletePost(){
