@@ -70,6 +70,8 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .pstat-icon{font-size:20px;margin-bottom:4px}
 .pstat-val{font-size:18px;font-weight:700}
 .pstat-label{font-size:10px;color:var(--muted);margin-top:2px}
+.task-list{display:flex;flex-direction:column;gap:7px}
+.task-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
 .hm-wrap{display:grid;grid-template-columns:22px repeat(8,1fr);gap:3px;font-size:10px}
 .hm-lbl{display:flex;align-items:center;justify-content:flex-end;padding-right:5px;color:var(--muted);height:22px}
 .hm-h{text-align:center;color:var(--muted);padding-bottom:4px;font-size:9px}
@@ -84,44 +86,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rank-val{font-size:12px;font-weight:500;justify-content:flex-end}
 .rank-eng{font-size:12px;color:var(--up);justify-content:flex-end}
 .rank-date{font-size:11px;color:var(--muted);justify-content:flex-end}
-
-/* ── Task styles ── */
-.task-section{margin-bottom:1rem}
-.task-section-label{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;margin-bottom:6px;padding-bottom:6px;border-bottom:0.5px solid var(--border)}
-.task-section-count{font-size:10px;background:var(--bg);color:var(--muted);border-radius:10px;padding:1px 6px;margin-left:auto}
-.task-row{display:flex;align-items:flex-start;gap:8px;padding:7px 8px;background:var(--bg);border-radius:9px;margin-bottom:5px}
-.task-row:last-child{margin-bottom:0}
-.tbox{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer}
-.tbox.done{background:#e6faf3;border-color:var(--up);color:var(--up)}
-.task-body{flex:1;min-width:0}
-.tlabel{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
-.tlabel.done{text-decoration:line-through;color:var(--muted)}
-.tdeadline{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:3px}
-.tdeadline.overdue{color:var(--down)}
-.file-chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
-.file-chip{display:flex;align-items:center;gap:4px;font-size:10px;padding:3px 7px;border-radius:5px;cursor:pointer}
-.file-chip.img{border:0.5px solid #bad1fb;background:#eef4ff;color:#1a3bcc}
-.file-chip.vid{border:0.5px solid #f9c0de;background:#fff0f8;color:#a0285a}
-.attach-btn{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--muted);background:none;border:0.5px dashed var(--border);border-radius:5px;padding:3px 7px;cursor:pointer;margin-top:5px;width:fit-content}
-.tdel{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:1px 3px;opacity:0;transition:opacity .15s;flex-shrink:0}
-.task-row:hover .tdel{opacity:1}
-.add-task-btn{width:100%;padding:6px;border-radius:8px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit;margin-top:8px}
-.add-task-btn:hover{border-color:var(--accent);color:var(--accent)}
-
-/* type pill colors */
-.tpill{font-size:9px;font-weight:600;padding:2px 6px;border-radius:8px;white-space:nowrap}
-.tpill.ai{background:#eef2ff;color:#3730a3}
-.tpill.hardsell{background:#fef3e2;color:#92400e}
-.tpill.review{background:#e1f5ee;color:#065f46}
-.tpill.unbox{background:#fff7ed;color:#9a3412}
-.tpill.howto{background:#f0fdf4;color:#166534}
-.tpill.promotion{background:#fdf4ff;color:#7e22ce}
-.tpill.importantday{background:#eff6ff;color:#1e40af}
-.tpill.variety{background:#fdf2f8;color:#9d174d}
-.tpill.trends{background:#fff1f2;color:#9f1239}
-.tpill.other{background:#f1f5f9;color:#475569}
-
-/* ── Calendar ── */
 #view-calendar{display:none}
 .cal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
 .filters{display:flex;gap:5px;flex-wrap:wrap}
@@ -149,9 +113,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .chip.yt{background:var(--yt-bg);color:var(--yt);border:1px solid #ffd0ce}
 .chip.ig{background:var(--ig-bg);color:var(--ig);border:1px solid #f9c0de}
 .chip.draft{opacity:.45;border-style:dashed}
-.chip-row1{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
-.chip-row2{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
-.chip-name{overflow:hidden;text-overflow:ellipsis;font-size:10px;font-weight:500}
+.chip-row1{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-row2{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-name{overflow:hidden;text-overflow:ellipsis;font-size:10px;font-weight:500}
 .chip-tag{font-size:9px;padding:1px 4px;border-radius:3px;flex-shrink:0;opacity:.8}
 .chip.fb .chip-tag{background:#dbe8fe;color:#1877f2}
 .chip.tk .chip-tag{background:#e5e5e5;color:#555}
@@ -166,8 +128,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--muted);flex-shrink:0}
 .sdot.on{background:var(--up);box-shadow:0 0 0 3px rgba(16,185,129,.15)}
 .sdot.err{background:var(--yt)}
-
-/* ── Modal ── */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,35,64,.45);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .overlay.open{display:flex}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem;width:420px;max-width:calc(100vw - 2rem);max-height:90vh;overflow-y:auto}
@@ -180,7 +140,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .fg input,.fg select,.fg textarea{width:100%;font-family:inherit;font-size:13px;padding:8px 11px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);background:#fff}
 .fg textarea{height:58px;resize:vertical}
-.type-desc-box{margin-top:5px;font-size:11px;color:var(--muted);padding:6px 10px;background:var(--bg);border-radius:7px;border-left:2px solid var(--border);line-height:1.5;display:none}
 .plat-checks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:2px}
 .pcheck{cursor:pointer}
 .pcheck input{display:none}
@@ -197,18 +156,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .btn-primary{background:var(--accent);border:none;padding:7px 18px;border-radius:9px;font-size:12px;cursor:pointer;color:#fff;font-weight:600;font-family:inherit}
 .btn-primary:hover{background:#1a3bcc}
 .btn-del{background:#fff5f5;border:1.5px solid #fdd;padding:7px 12px;border-radius:9px;font-size:12px;cursor:pointer;color:var(--yt);font-family:inherit}
-
-/* upload zone in task modal */
-.upload-zone{border:1.5px dashed var(--border);border-radius:9px;padding:.875rem;text-align:center;background:var(--bg);cursor:pointer}
-.upload-zone:hover{border-color:var(--accent)}
-.upload-zone-label{font-size:11px;color:var(--muted);margin-top:4px}
-.upload-zone-sub{font-size:10px;color:var(--muted);margin-top:2px;opacity:.7}
-.uploaded-files{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.uf-chip{display:flex;align-items:center;gap:4px;font-size:10px;padding:3px 8px;border-radius:5px;cursor:default}
-.uf-chip.img{background:#eef4ff;color:#1a3bcc;border:0.5px solid #bad1fb}
-.uf-chip.vid{background:#fff0f8;color:#a0285a;border:0.5px solid #f9c0de}
-.uf-remove{background:none;border:none;cursor:pointer;color:inherit;opacity:.6;font-size:11px;padding:0 0 0 3px}
-
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--text);color:#fff;font-size:12px;padding:9px 18px;border-radius:9px;opacity:0;transition:all .2s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .loading-wrap{display:none;position:fixed;inset:0;background:rgba(240,244,255,.85);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:10px}
@@ -225,6 +172,15 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rpill.pub{background:#e6faf3;color:#0a7a54}
 .rpill.sched{background:#fef3e2;color:#9a5a00}
 .rpill.draft{background:#f1f1f1;color:#888}
+.task{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:4px 0}
+.tbox{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
+.tbox.done{background:#e6faf3;border-color:var(--up);color:var(--up)}
+.task-info{flex:1;min-width:0}
+.tlabel{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tdeadline{font-size:10px;color:var(--muted)}
+.tdeadline.overdue{color:var(--down)}
+.tdel{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px;opacity:0;transition:opacity .15s}
+.task:hover .tdel{opacity:1}
 </style>
 </head>
 <body>
@@ -235,7 +191,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
   <div class="sb-item active" onclick="switchTab('dashboard')"><div class="sb-icon">🏠</div><span>ภาพรวม</span></div>
   <div class="sb-item" onclick="switchTab('calendar')"><div class="sb-icon">📅</div><span>ตาราง</span></div>
   <div class="sb-item" onclick="openAdd(fmt(today))"><div class="sb-icon">✏️</div><span>คอนเทนต์</span></div>
-  <div class="sb-item" onclick="switchTab('tasks')"><div class="sb-icon">✅</div><span>งาน</span></div>
+  <div class="sb-item"><div class="sb-icon">👥</div><span>ผู้ติดตาม</span></div>
   <div class="sb-item"><div class="sb-icon">⚙️</div><span>ตั้งค่า</span></div>
   <div class="sb-bottom"><div class="sb-avatar">ค</div></div>
 </div>
@@ -257,10 +213,8 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
       <button class="tnav" id="tnav-cal" onclick="switchTab('calendar')">📅 ปฏิทินคอนเทนต์</button>
     </div>
 
-    <!-- ════════════ DASHBOARD ════════════ -->
     <div id="view-dashboard">
       <div class="tip-bar">💡 Tip: โพสต์คอนเทนต์ช่วง 19:00–21:00 น. จะช่วยเพิ่มยอด engagement ได้มากขึ้น</div>
-
       <div class="metrics">
         <div class="mcard">
           <div class="mc-top"><div><div class="mc-label">ยอดวิว</div><div class="mc-val">284K</div></div><div class="mc-icon blue">👁</div></div>
@@ -275,20 +229,22 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
           <div class="mc-chg down">↓ -0.3% <span style="color:var(--muted)">vs เดือนก่อน</span></div>
         </div>
       </div>
-
-      <!-- งานที่ต้องทำ (อันแรก) -->
-      <div class="card" style="margin-bottom:1.25rem">
-        <div class="card-hdr">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="card-title">งานที่ต้องทำ</span>
-            <span id="task-count" style="font-size:11px;color:var(--muted)"></span>
+      <div class="mid-grid">
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">ยอดวิวรายสัปดาห์</span><span class="card-sub">7 วันที่ผ่านมา</span></div>
+          <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--yt);display:inline-block"></span>YouTube</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--ig);display:inline-block"></span>Instagram</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--tk);display:inline-block"></span>TikTok</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--fb);display:inline-block"></span>Facebook</span>
           </div>
-          <button onclick="openAddTask()" style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--accent);background:var(--accent-l);border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
+          <div style="position:relative;height:200px"><canvas id="barChart"></canvas></div>
         </div>
-        <div id="task-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">กำลังโหลด...</div></div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">คอนเทนต์ล่าสุด</span><span class="card-link" onclick="switchTab('calendar')">ดูทั้งหมด</span></div>
+          <div class="recent-list" id="recent-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.75rem">กำลังโหลด...</div></div>
+        </div>
       </div>
-
-      <!-- heatmap + ranking -->
       <div class="bot-grid">
         <div class="card">
           <div class="card-hdr"><span class="card-title">เวลาที่คนดูมากที่สุด</span>
@@ -306,9 +262,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
           <div id="ranking"></div>
         </div>
       </div>
-
-      <!-- เป้าหมาย + สถิติ -->
-      <div class="bot-grid">
+      <div class="third-grid">
         <div class="card">
           <div class="card-hdr"><span class="card-title">เป้าหมายประจำเดือน</span><span class="card-link">แก้ไข</span></div>
           <div class="goal-list">
@@ -326,28 +280,14 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
             <div class="pstat"><div class="pstat-icon">⏱</div><div class="pstat-val">82</div><div class="pstat-label">ชม./สัปดาห์</div></div>
           </div>
         </div>
-      </div>
-
-      <!-- ยอดวิวรายสัปดาห์ + คอนเทนต์ล่าสุด (ล่างสุด) -->
-      <div class="mid-grid">
         <div class="card">
-          <div class="card-hdr"><span class="card-title">ยอดวิวรายสัปดาห์</span><span class="card-sub">7 วันที่ผ่านมา</span></div>
-          <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--yt);display:inline-block"></span>YouTube</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--ig);display:inline-block"></span>Instagram</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--tk);display:inline-block"></span>TikTok</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--fb);display:inline-block"></span>Facebook</span>
-          </div>
-          <div style="position:relative;height:200px"><canvas id="barChart"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="card-hdr"><span class="card-title">คอนเทนต์ล่าสุด</span><span class="card-link" onclick="switchTab('calendar')">ดูทั้งหมด</span></div>
-          <div class="recent-list" id="recent-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.75rem">กำลังโหลด...</div></div>
+          <div class="task-hdr"><span class="card-title">งานที่ต้องทำ</span><span style="font-size:11px;color:var(--muted)" id="task-count"></span></div>
+          <div class="task-list" id="task-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">กำลังโหลด...</div></div>
+          <button onclick="openAddTask()" style="margin-top:8px;width:100%;padding:6px;border-radius:8px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
         </div>
       </div>
     </div>
 
-    <!-- ════════════ CALENDAR ════════════ -->
     <div id="view-calendar">
       <div class="status-row"><div class="sdot" id="sdot"></div><span id="stext">กำลังเชื่อมต่อ...</span></div>
       <div class="cal-toolbar">
@@ -378,25 +318,9 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
         <div class="leg"><div class="leg-pip" style="background:var(--ig-bg);border:1px solid #f9c0de"></div>Instagram</div>
       </div>
     </div>
-
-    <!-- ════════════ TASKS FULL PAGE ════════════ -->
-    <div id="view-tasks" style="display:none">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
-        <div>
-          <div style="font-size:18px;font-weight:700">งานที่ต้องทำ</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px" id="task-count-full"></div>
-        </div>
-        <button onclick="openAddTask()" style="display:flex;align-items:center;gap:6px;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
-      </div>
-      <div class="card">
-        <div id="task-list-full"><div style="font-size:12px;color:var(--muted);text-align:center;padding:1rem">กำลังโหลด...</div></div>
-        <button onclick="openAddTask()" class="add-task-btn">+ เพิ่มงานใหม่</button>
-      </div>
-    </div>
   </div>
 </div>
 
-<!-- ════════════ MODAL: คอนเทนต์ ════════════ -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-ico">📅</div><div class="modal-title" id="modal-title">เพิ่มคอนเทนต์</div></div>
@@ -404,7 +328,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
       <select id="f-type"><option value="ai">AI</option><option value="hardsell">Hard sell</option><option value="review">Review</option><option value="unbox">Unbox</option><option value="howto">How to</option><option value="promotion">Promotion</option><option value="importantday">Important day</option><option value="variety">Variety</option><option value="trends">Trends</option></select>
     </div>
     <div class="fg"><label class="flbl">รูปแบบสื่อ</label>
-      <div class="plat-checks">
+      <div class="plat-checks" id="f-media-wrap">
         <label class="pcheck"><input type="radio" name="f-media" value="video" checked><span class="pcheck-box fb" style="color:#2350c8;border-color:var(--border)"><span style="font-size:14px">🎬</span> วิดีโอ</span></label>
         <label class="pcheck"><input type="radio" name="f-media" value="photo"><span class="pcheck-box tk" style="color:#2350c8;border-color:var(--border)"><span style="font-size:14px">🖼</span> รูปภาพ</span></label>
       </div>
@@ -431,62 +355,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
     </div>
   </div>
 </div>
-
-<!-- ════════════ MODAL: งาน ════════════ -->
-<div class="overlay" id="task-overlay">
-  <div class="modal">
-    <div class="modal-hdr"><div class="modal-ico">✅</div><div class="modal-title" id="task-modal-title">เพิ่มงานใหม่</div></div>
-
-    <div class="fg"><label class="flbl">ชื่องาน</label>
-      <input type="text" id="t-name" placeholder="เช่น ถ่ายวิดีโอ, ตัดต่อ Reel...">
-    </div>
-
-    <div class="fg"><label class="flbl">รูปแบบคอนเทนต์</label>
-      <select id="t-type" onchange="updateTaskTypeDesc()">
-        <option value="">-- เลือกรูปแบบ --</option>
-        <option value="ai">AI</option>
-        <option value="hardsell">Hard sell</option>
-        <option value="review">Review</option>
-        <option value="unbox">Unbox</option>
-        <option value="howto">How to</option>
-        <option value="promotion">Promotion</option>
-        <option value="importantday">Important day</option>
-        <option value="variety">Variety</option>
-        <option value="trends">Trends</option>
-        <option value="other">อื่นๆ</option>
-      </select>
-      <div class="type-desc-box" id="t-type-desc"></div>
-    </div>
-
-    <div class="fg" id="t-other-wrap" style="display:none">
-      <label class="flbl">ระบุรูปแบบ</label>
-      <input type="text" id="t-other" placeholder="พิมพ์รูปแบบคอนเทนต์ของคุณ...">
-    </div>
-
-    <div class="fg"><label class="flbl">กำหนดส่ง</label>
-      <input type="date" id="t-deadline">
-    </div>
-
-    <div class="fg"><label class="flbl">แนบไฟล์ (รูป / วิดีโอ)</label>
-      <div class="upload-zone" onclick="document.getElementById('t-file-input').click()">
-        <div style="font-size:20px;color:var(--muted)">📎</div>
-        <div class="upload-zone-label">คลิกเพื่ออัปโหลด หรือลากไฟล์มาวาง</div>
-        <div class="upload-zone-sub">รองรับ .jpg .png .mp4 .mov — สูงสุด 100MB</div>
-      </div>
-      <input type="file" id="t-file-input" multiple accept="image/*,video/*" style="display:none" onchange="handleTaskFiles(this.files)">
-      <div class="uploaded-files" id="t-uploaded-files"></div>
-    </div>
-
-    <div class="mactions">
-      <button class="btn-del" id="task-delete-btn" style="display:none" onclick="deleteTaskFromModal()">ลบ</button>
-      <div class="mright">
-        <button class="btn-ghost" onclick="closeTaskModal()">ยกเลิก</button>
-        <button class="btn-primary" onclick="saveTask()">บันทึก</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -499,35 +367,11 @@ const PLAT={
   yt:{icon:'<img src="yt.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle">',label:'YouTube',bg:'#fff0f0',cl:'#ff4444'},
   ig:{icon:'<img src="ig.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle">',label:'Instagram',bg:'#fff0f8',cl:'#d62976'}
 };
-const TLBL={ai:'AI',hardsell:'Hard sell',review:'Review',unbox:'Unbox',howto:'How to',promotion:'Promotion',importantday:'Important day',variety:'Variety',trends:'Trends',other:'อื่นๆ'};
+const TLBL={ai:'AI',hardsell:'Hard sell',review:'Review',unbox:'Unbox',howto:'How to',promotion:'Promotion',importantday:'Important day',variety:'Variety',trends:'Trends'};
 const MLBL={video:'🎬',photo:'🖼'};
 const SLBL={pub:'เผยแพร่แล้ว',sched:'กำหนดโพสต์',draft:'ร่าง'};
 const SPILL={pub:'pub',sched:'sched',draft:'draft'};
-const TYPE_DESCS={
-  ai:'คอนเทนต์ที่ใช้ AI ช่วยสร้างหรือนำเสนอ เช่น สร้าง caption, ภาพ AI, voiceover',
-  hardsell:'โปรโมตสินค้าตรงๆ มุ่งเน้นการขาย บอกราคา ข้อดี และ CTA ชัดเจน',
-  review:'รีวิวสินค้าหรือบริการอย่างละเอียด เพื่อให้ผู้ชมตัดสินใจซื้อได้ง่ายขึ้น',
-  unbox:'เปิดกล่องสินค้าครั้งแรก แสดงของจริง บรรยากาศ และความประทับใจแรก',
-  howto:'สอนวิธีใช้งานหรือติดตั้งสินค้าทีละขั้นตอน เน้นให้ทำตามได้จริง',
-  promotion:'แจ้งโปรโมชัน ส่วนลด ของแถม หรือแคมเปญพิเศษในช่วงเวลานั้น',
-  importantday:'คอนเทนต์ที่เชื่อมโยงกับวันสำคัญ เทศกาล หรือวันหยุดแห่งชาติ',
-  variety:'เนื้อหาหลากหลาย ไม่เน้นขายตรง เช่น เกมส์ ควิซ เรื่องราว ความรู้ทั่วไป',
-  trends:'คอนเทนต์ตามกระแสหรือ viral ในช่วงนั้น เพื่อเพิ่มการมองเห็น',
-  other:'ระบุรูปแบบเองด้านล่าง หากไม่ตรงกับประเภทที่มีให้เลือก'
-};
-const TYPE_COLORS={
-  ai:'#eef2ff',hardsell:'#fef3e2',review:'#e1f5ee',unbox:'#fff7ed',
-  howto:'#f0fdf4',promotion:'#fdf4ff',importantday:'#eff6ff',
-  variety:'#fdf2f8',trends:'#fff1f2',other:'#f1f5f9'
-};
-const TYPE_TEXT={
-  ai:'#3730a3',hardsell:'#92400e',review:'#065f46',unbox:'#9a3412',
-  howto:'#166534',promotion:'#7e22ce',importantday:'#1e40af',
-  variety:'#9d174d',trends:'#9f1239',other:'#475569'
-};
-
 let posts=[],cur=new Date(),filter='all',editId=null;
-let tasks=[],taskEditId=null,taskFiles=[];
 const today=new Date();cur.setDate(1);
 
 const wk=Math.ceil(((today-new Date(today.getFullYear(),0,1))/86400000+new Date(today.getFullYear(),0,1).getDay()+1)/7);
@@ -541,34 +385,19 @@ function showLoading(v){document.getElementById('loading').classList[v?'add':'re
 function switchTab(tab){
   document.getElementById('view-dashboard').style.display=tab==='dashboard'?'block':'none';
   document.getElementById('view-calendar').style.display=tab==='calendar'?'block':'none';
-  document.getElementById('view-tasks').style.display=tab==='tasks'?'block':'none';
   document.getElementById('tnav-dash').classList[tab==='dashboard'?'add':'remove']('active');
   document.getElementById('tnav-cal').classList[tab==='calendar'?'add':'remove']('active');
-  document.querySelectorAll('.sb-item').forEach((el,i)=>{
-    el.classList.remove('active');
-    if((tab==='dashboard'&&i===0)||(tab==='calendar'&&i===1)||(tab==='tasks'&&i===3))el.classList.add('active');
-  });
+  document.querySelectorAll('.sb-item').forEach((el,i)=>{el.classList.remove('active');if((tab==='dashboard'&&i===0)||(tab==='calendar'&&i===1))el.classList.add('active')});
   if(tab==='calendar') render();
-  if(tab==='tasks') renderTasksFull();
-}
-
-function fetchJSONP(url){
-  return new Promise((resolve,reject)=>{
-    const cb='cb_'+Date.now()+'_'+Math.floor(Math.random()*10000);
-    window[cb]=function(data){resolve(data);delete window[cb];document.getElementById(cb)&&document.getElementById(cb).remove();};
-    const s=document.createElement('script');s.id=cb;
-    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;
-    s.onerror=()=>{reject(new Error('JSONP error'));delete window[cb];s.remove();};
-    document.head.appendChild(s);
-    setTimeout(()=>{if(window[cb]){reject(new Error('timeout'));delete window[cb];s.remove();}},10000);
-  });
 }
 
 async function apiCall(method,body){
   try{
-    if(method==='GET') return await fetchJSONP(API_URL+'?action=getPosts');
-    else if(method==='GET_TASKS') return await fetchJSONP(API_URL+'?action=getTasks');
-    else return await fetchJSONP(API_URL+'?action='+body.action+'&data='+encodeURIComponent(JSON.stringify(body)));
+    let res;
+    if(method==='GET') res=await fetch(API_URL+'?action=getPosts');
+    else if(method==='GET_TASKS') res=await fetch(API_URL+'?action=getTasks');
+    else res=await fetch(API_URL,{method:'POST',body:JSON.stringify(body)});
+    return await res.json();
   }catch(e){setStatus('err','เชื่อมต่อไม่ได้');toast('❌ เชื่อมต่อ Sheets ไม่ได้');return null}
 }
 
@@ -577,10 +406,7 @@ async function loadPosts(){
   const data=await apiCall('GET');showLoading(false);
   if(data&&data.posts){
     posts=data.posts.map(p=>({...p,date:String(p.date).substring(0,10)}));
-    setStatus('on','เชื่อมต่อแล้ว ✓');
-    const calView=document.getElementById('view-calendar');
-    if(calView&&calView.style.display!=='none') render();
-    renderRecent();updateStats();
+    setStatus('on','เชื่อมต่อแล้ว ✓');render();renderRecent();updateStats();
   } else setStatus('err','โหลดไม่สำเร็จ');
 }
 
@@ -600,231 +426,99 @@ function renderRecent(){
   }).join('');
 }
 
-new Chart(document.getElementById('barChart'),{
-  type:'bar',
-  data:{
-    labels:['จ','อ','พ','พฤ','ศ','ส','อา'],
-    datasets:[
-      {label:'YouTube',data:[40000,48000,36000,60000,54000,70000,65000],backgroundColor:'#ff4444',borderRadius:4},
-      {label:'Instagram',data:[25000,22000,26000,32000,25000,30000,28000],backgroundColor:'#d62976',borderRadius:4},
-      {label:'TikTok',data:[20000,26000,20000,28000,24000,26000,24000],backgroundColor:'#aaa',borderRadius:4},
-      {label:'Facebook',data:[18000,20000,20000,20000,22000,25000,22000],backgroundColor:'#1877f2',borderRadius:4},
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:ctx=>`${ctx.dataset.label}: ${Math.round(ctx.raw/1000)}K`}}},
-    scales:{
-      x:{grid:{display:false},ticks:{font:{size:10},color:'#9ca3af'}},
-      y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:10},color:'#9ca3af',callback:v=>Math.round(v/1000)+'K'},border:{display:false},beginAtZero:true}
-    }
-  }
-});
+new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:['จ','อ','พ','พฤ','ศ','ส','อา'],datasets:[{label:'YouTube',data:[40000,48000,36000,60000,54000,70000,65000],backgroundColor:'#ff4444',borderRadius:4},{label:'Instagram',data:[25000,22000,26000,32000,25000,30000,28000],backgroundColor:'#d62976',borderRadius:4},{label:'TikTok',data:[20000,26000,20000,28000,24000,26000,24000],backgroundColor:'#aaa',borderRadius:4},{label:'Facebook',data:[18000,20000,20000,20000,22000,25000,22000],backgroundColor:'#1877f2',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:ctx=>`${ctx.dataset.label}: ${Math.round(ctx.raw/1000)}K`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},color:'#9ca3af'}},y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:10},color:'#9ca3af',callback:v=>Math.round(v/1000)+'K'},border:{display:false},beginAtZero:true}}}});
 
-(function(){
-  const days=['จ','อ','พ','พฤ','ศ','ส','อา'];
-  const hours=['00','03','06','09','12','15','18','21'];
-  const data=[[1,1,0,0,2,3,4,3],[1,0,0,1,3,4,5,4],[0,0,1,1,3,3,4,3],[1,0,0,1,2,3,5,4],[1,1,0,0,2,4,5,3],[2,1,0,0,1,2,3,2],[1,1,0,0,1,2,2,2]];
-  const colors=['#f0f4ff','#c7d4fb','#8fabf5','#5278ef','#2350c8','#1a3bcc'];
-  const hm=document.getElementById('heatmap');
-  let html='<div class="hm-wrap"><div></div>'+hours.map(h=>`<div class="hm-h">${h}</div>`).join('');
-  days.forEach((day,di)=>{html+=`<div class="hm-lbl">${day}</div>`;hours.forEach((_,hi)=>{const v=data[di][hi];html+=`<div class="hm-cell" style="background:${colors[Math.min(v,colors.length-1)]}"></div>`;});});
-  html+='</div>';hm.innerHTML=html;
-})();
+(function(){const days=['จ','อ','พ','พฤ','ศ','ส','อา'];const hours=['00','03','06','09','12','15','18','21'];const data=[[1,1,0,0,2,3,4,3],[1,0,0,1,3,4,5,4],[0,0,1,1,3,3,4,3],[1,0,0,1,2,3,5,4],[1,1,0,0,2,4,5,3],[2,1,0,0,1,2,3,2],[1,1,0,0,1,2,2,2]];const colors=['#f0f4ff','#c7d4fb','#8fabf5','#5278ef','#2350c8','#1a3bcc'];const hm=document.getElementById('heatmap');let html='<div class="hm-wrap"><div></div>'+hours.map(h=>`<div class="hm-h">${h}</div>`).join('');days.forEach((day,di)=>{html+=`<div class="hm-lbl">${day}</div>`;hours.forEach((_,hi)=>{const v=data[di][hi];html+=`<div class="hm-cell" style="background:${colors[Math.min(v,colors.length-1)]}"></div>`;});});html+='</div>';hm.innerHTML=html;})();
 
-(function(){
-  const items=[
-    {rank:1,title:'รีวิวโกโลไฟพตถาน รุ่นใหม่ 2024',plat:'yt',views:'58K',eng:'9.2%',days:'2 วันที่แล้ว'},
-    {rank:2,title:'วิธีตั้งปลั๊กไฟตัวต่อเอง',plat:'tk',views:'42K',eng:'7.8%',days:'4 วันที่แล้ว'},
-    {rank:3,title:'เทคนิคเดินสายไฟให้ปลอดภัย',plat:'yt',views:'31K',eng:'6.1%',days:'1 วันที่แล้ว'},
-    {rank:4,title:'เปรียบเทียบเบรกเกอร์ A vs B',plat:'fb',views:'28K',eng:'5.4%',days:'3 วันที่แล้ว'},
-  ];
-  const rankColors=['#f59e0b','#9ca3af','#b45309','#6b7280'];
-  const el=document.getElementById('ranking');
-  el.innerHTML='<div class="rank-grid"><div class="rank-hdr">#</div><div class="rank-hdr"></div><div class="rank-hdr">ชื่อ</div><div class="rank-hdr" style="text-align:right">วิว</div><div class="rank-hdr" style="text-align:right">Eng.</div><div class="rank-hdr" style="text-align:right">เมื่อ</div>'
-    +items.map((it,i)=>{const pl=PLAT[it.plat]||PLAT.fb;return`<div class="rank-cell"><span class="rank-num" style="color:${rankColors[i]}">${it.rank}</span></div><div class="rank-cell"><div class="rank-plat" style="background:${pl.bg}">${pl.icon}</div></div><div class="rank-cell"><span class="rank-title">${it.title}</span></div><div class="rank-cell rank-val">${it.views}</div><div class="rank-cell rank-eng">${it.eng}</div><div class="rank-cell rank-date">${it.days}</div>`;}).join('')+'</div>';
-})();
+(function(){const items=[{rank:1,title:'รีวิวโกโลไฟพตถาน รุ่นใหม่ 2024',plat:'yt',views:'58K',eng:'9.2%',days:'2 วันที่แล้ว'},{rank:2,title:'วิธีตั้งปลั๊กไฟตัวต่อเอง',plat:'tk',views:'42K',eng:'7.8%',days:'4 วันที่แล้ว'},{rank:3,title:'เทคนิคเดินสายไฟให้ปลอดภัย',plat:'yt',views:'31K',eng:'6.1%',days:'1 วันที่แล้ว'},{rank:4,title:'เปรียบเทียบเบรกเกอร์ A vs B',plat:'fb',views:'28K',eng:'5.4%',days:'3 วันที่แล้ว'}];const rankColors=['#f59e0b','#9ca3af','#b45309','#6b7280'];const el=document.getElementById('ranking');el.innerHTML='<div class="rank-grid"><div class="rank-hdr">#</div><div class="rank-hdr"></div><div class="rank-hdr">ชื่อ</div><div class="rank-hdr" style="text-align:right">วิว</div><div class="rank-hdr" style="text-align:right">Eng.</div><div class="rank-hdr" style="text-align:right">เมื่อ</div>'+items.map((it,i)=>{const pl=PLAT[it.plat]||PLAT.fb;return`<div class="rank-cell"><span class="rank-num" style="color:${rankColors[i]}">${it.rank}</span></div><div class="rank-cell"><div class="rank-plat" style="background:${pl.bg}">${pl.icon}</div></div><div class="rank-cell"><span class="rank-title">${it.title}</span></div><div class="rank-cell rank-val">${it.views}</div><div class="rank-cell rank-eng">${it.eng}</div><div class="rank-cell rank-date">${it.days}</div>`;}).join('')+'</div>';})();
 
-/* ════════ TASKS ════════ */
+let tasks=[];
 
 async function loadTasks(){
   const data=await apiCall('GET_TASKS');
-  if(data&&data.tasks){tasks=data.tasks;renderTasks();renderTasksFull();}
-}
-
-function groupTasksByType(taskArr){
-  const groups={};
-  taskArr.forEach(t=>{
-    const key=t.type||'other';
-    if(!groups[key]) groups[key]=[];
-    groups[key].push(t);
-  });
-  return groups;
-}
-
-function taskSectionHTML(type,taskArr,todayStr){
-  const label=TLBL[type]||type;
-  const bg=TYPE_COLORS[type]||'#f1f5f9';
-  const cl=TYPE_TEXT[type]||'#475569';
-  const doneCount=taskArr.filter(t=>t.done==='true').length;
-  let html=`<div class="task-section">
-    <div class="task-section-label">
-      <span style="background:${bg};color:${cl};padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600">${label}</span>
-      <span class="task-section-count">${doneCount}/${taskArr.length}</span>
-    </div>`;
-  taskArr.forEach(t=>{
-    const done=t.done==='true';
-    const overdue=t.deadline&&t.deadline<todayStr&&!done;
-    const filesHTML=t.files&&t.files.length
-      ?'<div class="file-chips">'+t.files.map(f=>{
-          const isVid=f.match(/\.(mp4|mov|avi|webm)$/i);
-          return`<span class="file-chip ${isVid?'vid':'img'}">${isVid?'🎬':'🖼'} ${f}</span>`;
-        }).join('')+'</div>'
-      :`<div class="attach-btn" onclick="openEditTask('${t.id}')">📎 แนบไฟล์</div>`;
-    html+=`<div class="task-row">
-      <div class="tbox${done?' done':''}" onclick="toggleTaskDone('${t.id}','${t.done}')">${done?'✓':''}</div>
-      <div class="task-body">
-        <div class="tlabel${done?' done':''}">${t.name}</div>
-        ${t.deadline?`<div class="tdeadline${overdue?' overdue':''}">📅 ${t.deadline}${overdue?' · เกินกำหนด':''}</div>`:''}
-        ${filesHTML}
-      </div>
-      <button class="tdel" onclick="deleteTaskItem('${t.id}')">✕</button>
-    </div>`;
-  });
-  html+='</div>';
-  return html;
+  if(data&&data.tasks){tasks=data.tasks;renderTasks()}
 }
 
 function renderTasks(){
   const list=document.getElementById('task-list');
   const todayStr=fmt(new Date());
-  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">ยังไม่มีงาน</div>';updateTaskCount();return;}
-  const groups=groupTasksByType(tasks);
-  list.innerHTML=Object.entries(groups).map(([type,arr])=>taskSectionHTML(type,arr,todayStr)).join('');
-  updateTaskCount();
-}
-
-function renderTasksFull(){
-  const list=document.getElementById('task-list-full');
-  const todayStr=fmt(new Date());
-  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:1rem">ยังไม่มีงาน กด "+ เพิ่มงาน" เพื่อเริ่มต้น</div>';updateTaskCount();return;}
-  const groups=groupTasksByType(tasks);
-  list.innerHTML=Object.entries(groups).map(([type,arr])=>taskSectionHTML(type,arr,todayStr)).join('');
+  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">ยังไม่มีงาน</div>';updateTaskCount();return}
+  list.innerHTML=tasks.map(t=>{
+    const done=t.done==='true';
+    const overdue=t.deadline&&t.deadline<todayStr&&!done;
+    return`<div class="task${done?' done':''}" style="display:flex;align-items:center;gap:8px;padding:4px 0">
+      <div class="tbox${done?' done':''}" onclick="toggleTaskDone('${t.id}','${t.done}')" style="flex-shrink:0">${done?'✓':''}</div>
+      <div style="flex:1;min-width:0">
+        <div class="tlabel${done?' done':''}" style="font-size:12px;${done?'text-decoration:line-through;color:var(--muted)':''}">${t.name}</div>
+        ${t.deadline?`<div style="font-size:10px;color:${overdue?'var(--down)':'var(--muted)'}">📅 ${t.deadline}${overdue?' (เกินกำหนด)':''}</div>`:''}
+      </div>
+      <button onclick="deleteTaskItem('${t.id}')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;opacity:.5">✕</button>
+    </div>`;
+  }).join('');
   updateTaskCount();
 }
 
 function updateTaskCount(){
   const done=tasks.filter(t=>t.done==='true').length;
-  const txt=tasks.length?done+'/'+tasks.length+' เสร็จแล้ว':'';
-  const el1=document.getElementById('task-count');
-  const el2=document.getElementById('task-count-full');
-  if(el1) el1.textContent=txt;
-  if(el2) el2.textContent=txt;
+  document.getElementById('task-count').textContent=tasks.length?done+'/'+tasks.length+' เสร็จแล้ว':'';
 }
 
 async function toggleTaskDone(id,currentDone){
   const task=tasks.find(t=>t.id===id);
   if(!task) return;
   task.done=currentDone==='true'?'false':'true';
-  renderTasks();renderTasksFull();
+  renderTasks();
   await apiCall('POST',{action:'updateTask',id,task});
 }
 
 async function deleteTaskItem(id){
   if(!confirm('ลบงานนี้ใช่ไหม?')) return;
   const result=await apiCall('POST',{action:'deleteTask',id});
-  if(result&&result.success){tasks=tasks.filter(t=>t.id!==id);renderTasks();renderTasksFull();toast('ลบงานแล้ว')}
+  if(result&&result.success){tasks=tasks.filter(t=>t.id!==id);renderTasks();toast('ลบงานแล้ว')}
 }
-
-/* ── Task Modal ── */
-function updateTaskTypeDesc(){
-  const val=document.getElementById('t-type').value;
-  const descEl=document.getElementById('t-type-desc');
-  const otherEl=document.getElementById('t-other-wrap');
-  if(val&&TYPE_DESCS[val]){descEl.textContent=TYPE_DESCS[val];descEl.style.display='block';}
-  else{descEl.style.display='none';}
-  otherEl.style.display=val==='other'?'block':'none';
-}
-
-function handleTaskFiles(files){
-  Array.from(files).forEach(f=>taskFiles.push(f));
-  renderUploadedFiles();
-}
-
-function renderUploadedFiles(){
-  const wrap=document.getElementById('t-uploaded-files');
-  wrap.innerHTML=taskFiles.map((f,i)=>{
-    const isVid=f.name.match(/\.(mp4|mov|avi|webm)$/i);
-    return`<span class="uf-chip ${isVid?'vid':'img'}">${isVid?'🎬':'🖼'} ${f.name}<button class="uf-remove" onclick="removeFile(${i})">✕</button></span>`;
-  }).join('');
-}
-
-function removeFile(i){taskFiles.splice(i,1);renderUploadedFiles();}
 
 function openAddTask(){
-  taskEditId=null;taskFiles=[];
-  document.getElementById('task-modal-title').textContent='เพิ่มงานใหม่';
-  document.getElementById('t-name').value='';
-  document.getElementById('t-type').value='';
-  document.getElementById('t-type-desc').style.display='none';
-  document.getElementById('t-other-wrap').style.display='none';
-  document.getElementById('t-other').value='';
-  document.getElementById('t-deadline').value='';
-  document.getElementById('t-uploaded-files').innerHTML='';
-  document.getElementById('task-delete-btn').style.display='none';
-  document.getElementById('task-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('t-name').focus(),100);
+  const name=prompt('ชื่องาน:');
+  if(!name) return;
+  const deadline=prompt('กำหนดส่ง (YYYY-MM-DD) หรือเว้นว่างได้:');
+  addTaskItem(name.trim(),deadline?deadline.trim():'');
 }
 
-function openEditTask(id){
-  const task=tasks.find(t=>t.id===id);
-  if(!task) return;
-  taskEditId=id;taskFiles=[];
-  document.getElementById('task-modal-title').textContent='แก้ไขงาน';
-  document.getElementById('t-name').value=task.name||'';
-  document.getElementById('t-type').value=task.type||'';
-  updateTaskTypeDesc();
-  if(task.type==='other') document.getElementById('t-other').value=task.typeOther||'';
-  document.getElementById('t-deadline').value=task.deadline||'';
-  document.getElementById('t-uploaded-files').innerHTML='';
-  document.getElementById('task-delete-btn').style.display='inline-flex';
-  document.getElementById('task-overlay').classList.add('open');
+async function addTaskItem(name,deadline){
+  const result=await apiCall('POST',{action:'addTask',task:{name,deadline,done:'false'}});
+  if(result&&result.success){tasks.push({id:result.id,name,deadline,done:'false'});renderTasks();toast('✓ เพิ่มงานแล้ว')}
 }
 
-function closeTaskModal(){document.getElementById('task-overlay').classList.remove('open');}
-
-async function saveTask(){
-  const name=document.getElementById('t-name').value.trim();
-  if(!name){toast('⚠️ กรุณาใส่ชื่องาน');return;}
-  const type=document.getElementById('t-type').value;
-  const typeOther=type==='other'?document.getElementById('t-other').value.trim():'';
-  const deadline=document.getElementById('t-deadline').value;
-  const fileNames=taskFiles.map(f=>f.name);
-  const task={name,type,typeOther,deadline,done:'false',files:fileNames};
-  const btn=document.querySelector('#task-overlay .btn-primary');
-  btn.textContent='บันทึก...';btn.disabled=true;
-  let result;
-  if(taskEditId){
-    const existing=tasks.find(t=>t.id===taskEditId);
-    if(existing) task.done=existing.done;
-    result=await apiCall('POST',{action:'updateTask',id:taskEditId,task});
-  } else {
-    result=await apiCall('POST',{action:'addTask',task});
+function render(){
+  document.getElementById('month-lbl').textContent=MONTHS[cur.getMonth()]+' '+(cur.getFullYear()+543);
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  const first=new Date(cur.getFullYear(),cur.getMonth(),1),last=new Date(cur.getFullYear(),cur.getMonth()+1,0);
+  let start=new Date(first);start.setDate(start.getDate()-first.getDay());
+  let end=new Date(last);end.setDate(end.getDate()+(6-last.getDay()));
+  let d=new Date(start);
+  while(d<=end){
+    const ds=fmt(d),cell=document.createElement('div');
+    cell.className='cell'+(d.getMonth()!==cur.getMonth()?' other':'')+(fmt(d)===fmt(today)?' today':'');
+    const dn=document.createElement('div');dn.className='dnum';dn.textContent=d.getDate();cell.appendChild(dn);
+    posts.filter(p=>{
+      if(filter==='all') return p.date===ds;
+      return p.date===ds&&(p.platform||'').split(',').includes(filter);
+    }).forEach(p=>{
+      const firstPlat=(p.platform||'fb').split(',')[0];
+      const chip=document.createElement('button');
+      chip.className='chip '+firstPlat+(p.status==='draft'?' draft':'');
+      const icons=(p.platform||'fb').split(',').map(pl2=>PLAT[pl2]?`<img src="${pl2==='tk'?'tt':pl2}.png" style="width:12px;height:12px;object-fit:contain;vertical-align:middle">`:'').join('');
+      const typeLabel=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
+      const mediaLabel=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
+      chip.innerHTML=`<div class="chip-row1">${icons}${typeLabel}</div><div class="chip-row2"><span class="chip-name">${p.name}</span>${mediaLabel}</div>`;
+      chip.title=p.note||p.name;
+      chip.onclick=e=>{e.stopPropagation();openEdit(p)};cell.appendChild(chip);
+    });
+    const ab=document.createElement('button');ab.className='add-cell';ab.textContent='+';
+    ab.onclick=e=>{e.stopPropagation();openAdd(ds)};cell.appendChild(ab);
+    grid.appendChild(cell);d.setDate(d.getDate()+1);
   }
-  btn.textContent='บันทึก';btn.disabled=false;
-  closeTaskModal();
-  toast(taskEditId?'✓ แก้ไขงานแล้ว':'✓ เพิ่มงานแล้ว');
-  setTimeout(()=>loadTasks(),1500);
 }
-
-async function deleteTaskFromModal(){
-  if(!taskEditId||!confirm('ลบงานนี้ใช่ไหม?')) return;
-  const result=await apiCall('POST',{action:'deleteTask',id:taskEditId});
-  if(result&&result.success){closeTaskModal();tasks=tasks.filter(t=>t.id!==taskEditId);renderTasks();renderTasksFull();toast('ลบงานแล้ว');}
-}
-
-/* ════════ CONTENT MODAL ════════ */
-function closeModal(){document.getElementById('overlay').classList.remove('open');}
 
 function openAdd(ds){
   editId=null;document.getElementById('modal-title').textContent='เพิ่มคอนเทนต์';
@@ -856,69 +550,36 @@ function openEdit(post){
   document.getElementById('overlay').classList.add('open');
 }
 
+function closeModal(){document.getElementById('overlay').classList.remove('open')}
+
 async function savePost(){
   const name=document.getElementById('f-name').value.trim();
-  if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return;}
+  if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return}
   const selPlats=[...document.querySelectorAll('#f-platforms input:checked')].map(cb=>cb.value);
-  if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return;}
+  if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return}
   const media=document.querySelector('input[name="f-media"]:checked')?.value||'video';
   const post={name,type:document.getElementById('f-type').value,media,platform:selPlats.join(','),date:document.getElementById('f-date').value,status:document.getElementById('f-status').value,note:document.getElementById('f-note').value.trim()};
   const btn=document.getElementById('save-btn');btn.textContent='บันทึก...';btn.disabled=true;
   const result=editId?await apiCall('POST',{action:'updatePost',id:editId,post}):await apiCall('POST',{action:'addPost',post});
   btn.textContent='บันทึก';btn.disabled=false;
-  closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');
-  setTimeout(async()=>{await loadPosts();render();},1500);
+  if(result&&result.success){closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');await loadPosts()}
 }
 
 async function deletePost(){
-  if(!editId||!confirm('ต้องการลบคอนเทนต์นี้ใช่ไหม?')) return;
+  if(!editId||!confirm('ต้องการลบคอนเทนต์นี้ใช่ไหม?'))return;
   const result=await apiCall('POST',{action:'deletePost',id:editId});
-  closeModal();toast('ลบเรียบร้อย');
-  setTimeout(()=>loadPosts(),1500);
+  if(result&&result.success){closeModal();toast('ลบเรียบร้อย');await loadPosts()}
 }
 
 document.getElementById('save-btn').onclick=savePost;
 document.getElementById('cancel-btn').onclick=closeModal;
 document.getElementById('delete-btn').onclick=deletePost;
-document.getElementById('overlay').onclick=e=>{if(e.target===e.currentTarget)closeModal();};
-document.getElementById('task-overlay').onclick=e=>{if(e.target===e.currentTarget)closeTaskModal();};
-document.getElementById('prev').onclick=()=>{cur.setMonth(cur.getMonth()-1);render();};
-document.getElementById('next').onclick=()=>{cur.setMonth(cur.getMonth()+1);render();};
+document.getElementById('overlay').onclick=e=>{if(e.target===e.currentTarget)closeModal()};
+document.getElementById('prev').onclick=()=>{cur.setMonth(cur.getMonth()-1);render()};
+document.getElementById('next').onclick=()=>{cur.setMonth(cur.getMonth()+1);render()};
 document.getElementById('filters').querySelectorAll('.f-btn').forEach(btn=>{
-  btn.onclick=()=>{filter=btn.dataset.p;document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();};
+  btn.onclick=()=>{filter=btn.dataset.p;document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()};
 });
-
-/* ════════ CALENDAR RENDER ════════ */
-function render(){
-  document.getElementById('month-lbl').textContent=MONTHS[cur.getMonth()]+' '+(cur.getFullYear()+543);
-  const grid=document.getElementById('cal-grid');grid.innerHTML='';
-  const first=new Date(cur.getFullYear(),cur.getMonth(),1),last=new Date(cur.getFullYear(),cur.getMonth()+1,0);
-  let start=new Date(first);start.setDate(start.getDate()-first.getDay());
-  let end=new Date(last);end.setDate(end.getDate()+(6-last.getDay()));
-  let d=new Date(start);
-  while(d<=end){
-    const ds=fmt(d),cell=document.createElement('div');
-    cell.className='cell'+(d.getMonth()!==cur.getMonth()?' other':'')+(fmt(d)===fmt(today)?' today':'');
-    const dn=document.createElement('div');dn.className='dnum';dn.textContent=d.getDate();cell.appendChild(dn);
-    posts.filter(p=>{
-      if(filter==='all') return p.date===ds;
-      return p.date===ds&&(p.platform||'').split(',').includes(filter);
-    }).forEach(p=>{
-      const firstPlat=(p.platform||'fb').split(',')[0];
-      const chip=document.createElement('button');
-      chip.className='chip '+firstPlat+(p.status==='draft'?' draft':'');
-      const icons=(p.platform||'fb').split(',').map(pl2=>PLAT[pl2]?`<img src="${pl2==='tk'?'tt':pl2}.png" style="width:12px;height:12px;object-fit:contain;vertical-align:middle">`:'').join('');
-      const typeLabel=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
-      const mediaLabel=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
-      chip.innerHTML=`<div class="chip-row1">${icons}${typeLabel}</div><div class="chip-row2"><span class="chip-name">${p.name}</span>${mediaLabel}</div>`;
-      chip.title=p.note||p.name;
-      chip.onclick=e=>{e.stopPropagation();openEdit(p);};cell.appendChild(chip);
-    });
-    const ab=document.createElement('button');ab.className='add-cell';ab.textContent='+';
-    ab.onclick=e=>{e.stopPropagation();openAdd(ds);};cell.appendChild(ab);
-    grid.appendChild(cell);d.setDate(d.getDate()+1);
-  }
-}
 
 loadPosts();
 loadTasks();
