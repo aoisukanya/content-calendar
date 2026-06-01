@@ -57,7 +57,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .card-sub{font-size:11px;color:var(--muted)}
 .card-link{font-size:11px;color:var(--accent);cursor:pointer}
 .bot-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
-.third-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:1.25rem}
 .goal-list{display:flex;flex-direction:column;gap:12px}
 .goal-top{display:flex;justify-content:space-between;margin-bottom:5px}
 .goal-label{font-size:12px}
@@ -70,8 +69,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .pstat-icon{font-size:20px;margin-bottom:4px}
 .pstat-val{font-size:18px;font-weight:700}
 .pstat-label{font-size:10px;color:var(--muted);margin-top:2px}
-.task-list{display:flex;flex-direction:column;gap:7px}
-.task-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem}
 .hm-wrap{display:grid;grid-template-columns:22px repeat(8,1fr);gap:3px;font-size:10px}
 .hm-lbl{display:flex;align-items:center;justify-content:flex-end;padding-right:5px;color:var(--muted);height:22px}
 .hm-h{text-align:center;color:var(--muted);padding-bottom:4px;font-size:9px}
@@ -86,6 +83,20 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rank-val{font-size:12px;font-weight:500;justify-content:flex-end}
 .rank-eng{font-size:12px;color:var(--up);justify-content:flex-end}
 .rank-date{font-size:11px;color:var(--muted);justify-content:flex-end}
+/* task */
+.task-section{margin-bottom:1rem}
+.task-section-label{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;margin-bottom:6px;padding-bottom:6px;border-bottom:0.5px solid var(--border)}
+.task-row{display:flex;align-items:flex-start;gap:8px;padding:7px 8px;background:var(--bg);border-radius:9px;margin-bottom:5px}
+.tbox{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer}
+.tbox.done{background:#e6faf3;border-color:var(--up);color:var(--up)}
+.tlabel{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
+.tlabel.done{text-decoration:line-through;color:var(--muted)}
+.tdeadline{font-size:10px;color:var(--muted)}
+.tdeadline.overdue{color:var(--down)}
+.tdel{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;opacity:0;transition:opacity .15s;flex-shrink:0}
+.task-row:hover .tdel{opacity:1}
+.type-desc-box{margin-top:5px;font-size:11px;color:var(--muted);padding:6px 10px;background:var(--bg);border-radius:7px;border-left:2px solid var(--border);line-height:1.5;display:none}
+/* calendar */
 #view-calendar{display:none}
 .cal-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
 .filters{display:flex;gap:5px;flex-wrap:wrap}
@@ -113,7 +124,9 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .chip.yt{background:var(--yt-bg);color:var(--yt);border:1px solid #ffd0ce}
 .chip.ig{background:var(--ig-bg);color:var(--ig);border:1px solid #f9c0de}
 .chip.draft{opacity:.45;border-style:dashed}
-.chip-row1{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-row2{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}.chip-name{overflow:hidden;text-overflow:ellipsis;font-size:10px;font-weight:500}
+.chip-row1{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
+.chip-row2{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
+.chip-name{overflow:hidden;text-overflow:ellipsis;font-size:10px;font-weight:500}
 .chip-tag{font-size:9px;padding:1px 4px;border-radius:3px;flex-shrink:0;opacity:.8}
 .chip.fb .chip-tag{background:#dbe8fe;color:#1877f2}
 .chip.tk .chip-tag{background:#e5e5e5;color:#555}
@@ -172,15 +185,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 .rpill.pub{background:#e6faf3;color:#0a7a54}
 .rpill.sched{background:#fef3e2;color:#9a5a00}
 .rpill.draft{background:#f1f1f1;color:#888}
-.task{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:4px 0}
-.tbox{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px}
-.tbox.done{background:#e6faf3;border-color:var(--up);color:var(--up)}
-.task-info{flex:1;min-width:0}
-.tlabel{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tdeadline{font-size:10px;color:var(--muted)}
-.tdeadline.overdue{color:var(--down)}
-.tdel{background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;padding:0 2px;opacity:0;transition:opacity .15s}
-.task:hover .tdel{opacity:1}
 </style>
 </head>
 <body>
@@ -191,7 +195,6 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
   <div class="sb-item active" onclick="switchTab('dashboard')"><div class="sb-icon">🏠</div><span>ภาพรวม</span></div>
   <div class="sb-item" onclick="switchTab('calendar')"><div class="sb-icon">📅</div><span>ตาราง</span></div>
   <div class="sb-item" onclick="openAdd(fmt(today))"><div class="sb-icon">✏️</div><span>คอนเทนต์</span></div>
-  <div class="sb-item"><div class="sb-icon">👥</div><span>ผู้ติดตาม</span></div>
   <div class="sb-item"><div class="sb-icon">⚙️</div><span>ตั้งค่า</span></div>
   <div class="sb-bottom"><div class="sb-avatar">ค</div></div>
 </div>
@@ -215,6 +218,8 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
 
     <div id="view-dashboard">
       <div class="tip-bar">💡 Tip: โพสต์คอนเทนต์ช่วง 19:00–21:00 น. จะช่วยเพิ่มยอด engagement ได้มากขึ้น</div>
+
+      <!-- metrics -->
       <div class="metrics">
         <div class="mcard">
           <div class="mc-top"><div><div class="mc-label">ยอดวิว</div><div class="mc-val">284K</div></div><div class="mc-icon blue">👁</div></div>
@@ -229,22 +234,20 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
           <div class="mc-chg down">↓ -0.3% <span style="color:var(--muted)">vs เดือนก่อน</span></div>
         </div>
       </div>
-      <div class="mid-grid">
-        <div class="card">
-          <div class="card-hdr"><span class="card-title">ยอดวิวรายสัปดาห์</span><span class="card-sub">7 วันที่ผ่านมา</span></div>
-          <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--yt);display:inline-block"></span>YouTube</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--ig);display:inline-block"></span>Instagram</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--tk);display:inline-block"></span>TikTok</span>
-            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--fb);display:inline-block"></span>Facebook</span>
+
+      <!-- งานที่ต้องทำ (ขึ้นมาอยู่บน) -->
+      <div class="card" style="margin-bottom:1.25rem">
+        <div class="card-hdr">
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="card-title">งานที่ต้องทำ</span>
+            <span id="task-count" style="font-size:11px;color:var(--muted)"></span>
           </div>
-          <div style="position:relative;height:200px"><canvas id="barChart"></canvas></div>
+          <button onclick="openAddTask()" style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--accent);background:var(--accent-l);border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
         </div>
-        <div class="card">
-          <div class="card-hdr"><span class="card-title">คอนเทนต์ล่าสุด</span><span class="card-link" onclick="switchTab('calendar')">ดูทั้งหมด</span></div>
-          <div class="recent-list" id="recent-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.75rem">กำลังโหลด...</div></div>
-        </div>
+        <div id="task-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">กำลังโหลด...</div></div>
       </div>
+
+      <!-- heatmap + ranking -->
       <div class="bot-grid">
         <div class="card">
           <div class="card-hdr"><span class="card-title">เวลาที่คนดูมากที่สุด</span>
@@ -262,7 +265,9 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
           <div id="ranking"></div>
         </div>
       </div>
-      <div class="third-grid">
+
+      <!-- เป้าหมาย + สถิติ -->
+      <div class="bot-grid">
         <div class="card">
           <div class="card-hdr"><span class="card-title">เป้าหมายประจำเดือน</span><span class="card-link">แก้ไข</span></div>
           <div class="goal-list">
@@ -280,14 +285,28 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
             <div class="pstat"><div class="pstat-icon">⏱</div><div class="pstat-val">82</div><div class="pstat-label">ชม./สัปดาห์</div></div>
           </div>
         </div>
+      </div>
+
+      <!-- ยอดวิวรายสัปดาห์ + คอนเทนต์ล่าสุด (ล่างสุด) -->
+      <div class="mid-grid">
         <div class="card">
-          <div class="task-hdr"><span class="card-title">งานที่ต้องทำ</span><span style="font-size:11px;color:var(--muted)" id="task-count"></span></div>
-          <div class="task-list" id="task-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">กำลังโหลด...</div></div>
-          <button onclick="openAddTask()" style="margin-top:8px;width:100%;padding:6px;border-radius:8px;border:1.5px dashed var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit">+ เพิ่มงาน</button>
+          <div class="card-hdr"><span class="card-title">ยอดวิวรายสัปดาห์</span><span class="card-sub">7 วันที่ผ่านมา</span></div>
+          <div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--yt);display:inline-block"></span>YouTube</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--ig);display:inline-block"></span>Instagram</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--tk);display:inline-block"></span>TikTok</span>
+            <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)"><span style="width:10px;height:10px;border-radius:2px;background:var(--fb);display:inline-block"></span>Facebook</span>
+          </div>
+          <div style="position:relative;height:200px"><canvas id="barChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-hdr"><span class="card-title">คอนเทนต์ล่าสุด</span><span class="card-link" onclick="switchTab('calendar')">ดูทั้งหมด</span></div>
+          <div class="recent-list" id="recent-list"><div style="font-size:12px;color:var(--muted);text-align:center;padding:.75rem">กำลังโหลด...</div></div>
         </div>
       </div>
     </div>
 
+    <!-- calendar -->
     <div id="view-calendar">
       <div class="status-row"><div class="sdot" id="sdot"></div><span id="stext">กำลังเชื่อมต่อ...</span></div>
       <div class="cal-toolbar">
@@ -321,6 +340,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
   </div>
 </div>
 
+<!-- modal คอนเทนต์ -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-ico">📅</div><div class="modal-title" id="modal-title">เพิ่มคอนเทนต์</div></div>
@@ -328,7 +348,7 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
       <select id="f-type"><option value="ai">AI</option><option value="hardsell">Hard sell</option><option value="review">Review</option><option value="unbox">Unbox</option><option value="howto">How to</option><option value="promotion">Promotion</option><option value="importantday">Important day</option><option value="variety">Variety</option><option value="trends">Trends</option></select>
     </div>
     <div class="fg"><label class="flbl">รูปแบบสื่อ</label>
-      <div class="plat-checks" id="f-media-wrap">
+      <div class="plat-checks">
         <label class="pcheck"><input type="radio" name="f-media" value="video" checked><span class="pcheck-box fb" style="color:#2350c8;border-color:var(--border)"><span style="font-size:14px">🎬</span> วิดีโอ</span></label>
         <label class="pcheck"><input type="radio" name="f-media" value="photo"><span class="pcheck-box tk" style="color:#2350c8;border-color:var(--border)"><span style="font-size:14px">🖼</span> รูปภาพ</span></label>
       </div>
@@ -355,8 +375,38 @@ body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--te
     </div>
   </div>
 </div>
-<div class="toast" id="toast"></div>
 
+<!-- modal งาน -->
+<div class="overlay" id="task-overlay">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-ico">✅</div><div class="modal-title">เพิ่มงานใหม่</div></div>
+    <div class="fg"><label class="flbl">ชื่องาน</label><input type="text" id="t-name" placeholder="เช่น ถ่ายวิดีโอ, ตัดต่อ..."></div>
+    <div class="fg"><label class="flbl">รูปแบบคอนเทนต์</label>
+      <select id="t-type" onchange="updateTaskTypeDesc()">
+        <option value="">-- เลือกรูปแบบ --</option>
+        <option value="ai">AI</option>
+        <option value="hardsell">Hard sell</option>
+        <option value="review">Review</option>
+        <option value="unbox">Unbox</option>
+        <option value="howto">How to</option>
+        <option value="promotion">Promotion</option>
+        <option value="importantday">Important day</option>
+        <option value="variety">Variety</option>
+        <option value="trends">Trends</option>
+        <option value="other">อื่นๆ</option>
+      </select>
+      <div class="type-desc-box" id="t-type-desc"></div>
+    </div>
+    <div class="fg" id="t-other-wrap" style="display:none"><label class="flbl">ระบุรูปแบบ</label><input type="text" id="t-other" placeholder="พิมพ์รูปแบบของคุณ..."></div>
+    <div class="fg"><label class="flbl">กำหนดส่ง</label><input type="date" id="t-deadline"></div>
+    <div class="mactions">
+      <button class="btn-del" id="task-delete-btn" style="display:none" onclick="deleteTaskFromModal()">ลบ</button>
+      <div class="mright"><button class="btn-ghost" onclick="closeTaskModal()">ยกเลิก</button><button class="btn-primary" onclick="saveTask()">บันทึก</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const API_URL='https://script.google.com/macros/s/AKfycbwovhKCWXigUi-y58Nv1BZqmzr-nyWY3GGI2Ur92g-xQb8MFNaMFo-e_hMQ1aBhGFoJ/exec';
@@ -367,11 +417,15 @@ const PLAT={
   yt:{icon:'<img src="yt.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle">',label:'YouTube',bg:'#fff0f0',cl:'#ff4444'},
   ig:{icon:'<img src="ig.png" style="width:13px;height:13px;object-fit:contain;vertical-align:middle">',label:'Instagram',bg:'#fff0f8',cl:'#d62976'}
 };
-const TLBL={ai:'AI',hardsell:'Hard sell',review:'Review',unbox:'Unbox',howto:'How to',promotion:'Promotion',importantday:'Important day',variety:'Variety',trends:'Trends'};
+const TLBL={ai:'AI',hardsell:'Hard sell',review:'Review',unbox:'Unbox',howto:'How to',promotion:'Promotion',importantday:'Important day',variety:'Variety',trends:'Trends',other:'อื่นๆ'};
 const MLBL={video:'🎬',photo:'🖼'};
 const SLBL={pub:'เผยแพร่แล้ว',sched:'กำหนดโพสต์',draft:'ร่าง'};
 const SPILL={pub:'pub',sched:'sched',draft:'draft'};
-let posts=[],cur=new Date(),filter='all',editId=null;
+const TYPE_DESCS={ai:'คอนเทนต์ที่ใช้ AI ช่วยสร้างหรือนำเสนอ',hardsell:'โปรโมตสินค้าตรงๆ มุ่งเน้นการขาย',review:'รีวิวสินค้าหรือบริการอย่างละเอียด',unbox:'เปิดกล่องสินค้าครั้งแรก แสดงของจริง',howto:'สอนวิธีใช้งานหรือติดตั้งทีละขั้นตอน',promotion:'แจ้งโปรโมชัน ส่วนลด หรือของแถม',importantday:'คอนเทนต์วันสำคัญหรือเทศกาล',variety:'เนื้อหาหลากหลาย ไม่เน้นขายตรง',trends:'คอนเทนต์ตามกระแสหรือ viral',other:'ระบุรูปแบบเองด้านล่าง'};
+const TYPE_COLORS={ai:'#eef2ff',hardsell:'#fef3e2',review:'#e1f5ee',unbox:'#fff7ed',howto:'#f0fdf4',promotion:'#fdf4ff',importantday:'#eff6ff',variety:'#fdf2f8',trends:'#fff1f2',other:'#f1f5f9'};
+const TYPE_TEXT={ai:'#3730a3',hardsell:'#92400e',review:'#065f46',unbox:'#9a3412',howto:'#166534',promotion:'#7e22ce',importantday:'#1e40af',variety:'#9d174d',trends:'#9f1239',other:'#475569'};
+
+let posts=[],cur=new Date(),filter='all',editId=null,tasks=[],taskEditId=null;
 const today=new Date();cur.setDate(1);
 
 const wk=Math.ceil(((today-new Date(today.getFullYear(),0,1))/86400000+new Date(today.getFullYear(),0,1).getDay()+1)/7);
@@ -432,28 +486,43 @@ new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:['จ','�
 
 (function(){const items=[{rank:1,title:'รีวิวโกโลไฟพตถาน รุ่นใหม่ 2024',plat:'yt',views:'58K',eng:'9.2%',days:'2 วันที่แล้ว'},{rank:2,title:'วิธีตั้งปลั๊กไฟตัวต่อเอง',plat:'tk',views:'42K',eng:'7.8%',days:'4 วันที่แล้ว'},{rank:3,title:'เทคนิคเดินสายไฟให้ปลอดภัย',plat:'yt',views:'31K',eng:'6.1%',days:'1 วันที่แล้ว'},{rank:4,title:'เปรียบเทียบเบรกเกอร์ A vs B',plat:'fb',views:'28K',eng:'5.4%',days:'3 วันที่แล้ว'}];const rankColors=['#f59e0b','#9ca3af','#b45309','#6b7280'];const el=document.getElementById('ranking');el.innerHTML='<div class="rank-grid"><div class="rank-hdr">#</div><div class="rank-hdr"></div><div class="rank-hdr">ชื่อ</div><div class="rank-hdr" style="text-align:right">วิว</div><div class="rank-hdr" style="text-align:right">Eng.</div><div class="rank-hdr" style="text-align:right">เมื่อ</div>'+items.map((it,i)=>{const pl=PLAT[it.plat]||PLAT.fb;return`<div class="rank-cell"><span class="rank-num" style="color:${rankColors[i]}">${it.rank}</span></div><div class="rank-cell"><div class="rank-plat" style="background:${pl.bg}">${pl.icon}</div></div><div class="rank-cell"><span class="rank-title">${it.title}</span></div><div class="rank-cell rank-val">${it.views}</div><div class="rank-cell rank-eng">${it.eng}</div><div class="rank-cell rank-date">${it.days}</div>`;}).join('')+'</div>';})();
 
-let tasks=[];
-
+/* ── TASKS ── */
 async function loadTasks(){
   const data=await apiCall('GET_TASKS');
-  if(data&&data.tasks){tasks=data.tasks;renderTasks()}
+  if(data&&data.tasks){tasks=data.tasks;renderTasks();}
+}
+
+function groupTasksByType(arr){
+  const g={};
+  arr.forEach(t=>{const k=t.type||'other';if(!g[k])g[k]=[];g[k].push(t);});
+  return g;
 }
 
 function renderTasks(){
   const list=document.getElementById('task-list');
   const todayStr=fmt(new Date());
-  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">ยังไม่มีงาน</div>';updateTaskCount();return}
-  list.innerHTML=tasks.map(t=>{
-    const done=t.done==='true';
-    const overdue=t.deadline&&t.deadline<todayStr&&!done;
-    return`<div class="task${done?' done':''}" style="display:flex;align-items:center;gap:8px;padding:4px 0">
-      <div class="tbox${done?' done':''}" onclick="toggleTaskDone('${t.id}','${t.done}')" style="flex-shrink:0">${done?'✓':''}</div>
-      <div style="flex:1;min-width:0">
-        <div class="tlabel${done?' done':''}" style="font-size:12px;${done?'text-decoration:line-through;color:var(--muted)':''}">${t.name}</div>
-        ${t.deadline?`<div style="font-size:10px;color:${overdue?'var(--down)':'var(--muted)'}">📅 ${t.deadline}${overdue?' (เกินกำหนด)':''}</div>`:''}
-      </div>
-      <button onclick="deleteTaskItem('${t.id}')" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:14px;opacity:.5">✕</button>
-    </div>`;
+  if(!tasks.length){list.innerHTML='<div style="font-size:12px;color:var(--muted);text-align:center;padding:.5rem">ยังไม่มีงาน</div>';updateTaskCount();return;}
+  const groups=groupTasksByType(tasks);
+  list.innerHTML=Object.entries(groups).map(([type,arr])=>{
+    const label=TLBL[type]||type;
+    const bg=TYPE_COLORS[type]||'#f1f5f9';
+    const cl=TYPE_TEXT[type]||'#475569';
+    const doneCount=arr.filter(t=>t.done==='true').length;
+    let html=`<div class="task-section"><div class="task-section-label"><span style="background:${bg};color:${cl};padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600">${label}</span><span style="margin-left:auto;font-size:10px;background:var(--bg);padding:1px 6px;border-radius:10px;color:var(--muted)">${doneCount}/${arr.length}</span></div>`;
+    arr.forEach(t=>{
+      const done=t.done==='true';
+      const overdue=t.deadline&&t.deadline<todayStr&&!done;
+      html+=`<div class="task-row">
+        <div class="tbox${done?' done':''}" onclick="toggleTaskDone('${t.id}','${t.done}')">${done?'✓':''}</div>
+        <div style="flex:1;min-width:0">
+          <div class="tlabel${done?' done':''}">${t.name}</div>
+          ${t.deadline?`<div class="tdeadline${overdue?' overdue':''}">📅 ${t.deadline}${overdue?' · เกินกำหนด':''}</div>`:''}
+        </div>
+        <button class="tdel" onclick="deleteTaskItem('${t.id}')">✕</button>
+      </div>`;
+    });
+    html+='</div>';
+    return html;
   }).join('');
   updateTaskCount();
 }
@@ -474,51 +543,60 @@ async function toggleTaskDone(id,currentDone){
 async function deleteTaskItem(id){
   if(!confirm('ลบงานนี้ใช่ไหม?')) return;
   const result=await apiCall('POST',{action:'deleteTask',id});
-  if(result&&result.success){tasks=tasks.filter(t=>t.id!==id);renderTasks();toast('ลบงานแล้ว')}
+  if(result&&result.success){tasks=tasks.filter(t=>t.id!==id);renderTasks();toast('ลบงานแล้ว');}
+}
+
+function updateTaskTypeDesc(){
+  const val=document.getElementById('t-type').value;
+  const descEl=document.getElementById('t-type-desc');
+  const otherEl=document.getElementById('t-other-wrap');
+  if(val&&TYPE_DESCS[val]){descEl.textContent=TYPE_DESCS[val];descEl.style.display='block';}
+  else descEl.style.display='none';
+  otherEl.style.display=val==='other'?'block':'none';
 }
 
 function openAddTask(){
-  const name=prompt('ชื่องาน:');
-  if(!name) return;
-  const deadline=prompt('กำหนดส่ง (YYYY-MM-DD) หรือเว้นว่างได้:');
-  addTaskItem(name.trim(),deadline?deadline.trim():'');
+  taskEditId=null;
+  document.getElementById('t-name').value='';
+  document.getElementById('t-type').value='';
+  document.getElementById('t-type-desc').style.display='none';
+  document.getElementById('t-other-wrap').style.display='none';
+  document.getElementById('t-other').value='';
+  document.getElementById('t-deadline').value='';
+  document.getElementById('task-delete-btn').style.display='none';
+  document.getElementById('task-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('t-name').focus(),100);
 }
 
-async function addTaskItem(name,deadline){
-  const result=await apiCall('POST',{action:'addTask',task:{name,deadline,done:'false'}});
-  if(result&&result.success){tasks.push({id:result.id,name,deadline,done:'false'});renderTasks();toast('✓ เพิ่มงานแล้ว')}
-}
+function closeTaskModal(){document.getElementById('task-overlay').classList.remove('open');}
 
-function render(){
-  document.getElementById('month-lbl').textContent=MONTHS[cur.getMonth()]+' '+(cur.getFullYear()+543);
-  const grid=document.getElementById('cal-grid');grid.innerHTML='';
-  const first=new Date(cur.getFullYear(),cur.getMonth(),1),last=new Date(cur.getFullYear(),cur.getMonth()+1,0);
-  let start=new Date(first);start.setDate(start.getDate()-first.getDay());
-  let end=new Date(last);end.setDate(end.getDate()+(6-last.getDay()));
-  let d=new Date(start);
-  while(d<=end){
-    const ds=fmt(d),cell=document.createElement('div');
-    cell.className='cell'+(d.getMonth()!==cur.getMonth()?' other':'')+(fmt(d)===fmt(today)?' today':'');
-    const dn=document.createElement('div');dn.className='dnum';dn.textContent=d.getDate();cell.appendChild(dn);
-    posts.filter(p=>{
-      if(filter==='all') return p.date===ds;
-      return p.date===ds&&(p.platform||'').split(',').includes(filter);
-    }).forEach(p=>{
-      const firstPlat=(p.platform||'fb').split(',')[0];
-      const chip=document.createElement('button');
-      chip.className='chip '+firstPlat+(p.status==='draft'?' draft':'');
-      const icons=(p.platform||'fb').split(',').map(pl2=>PLAT[pl2]?`<img src="${pl2==='tk'?'tt':pl2}.png" style="width:12px;height:12px;object-fit:contain;vertical-align:middle">`:'').join('');
-      const typeLabel=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
-      const mediaLabel=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
-      chip.innerHTML=`<div class="chip-row1">${icons}${typeLabel}</div><div class="chip-row2"><span class="chip-name">${p.name}</span>${mediaLabel}</div>`;
-      chip.title=p.note||p.name;
-      chip.onclick=e=>{e.stopPropagation();openEdit(p)};cell.appendChild(chip);
-    });
-    const ab=document.createElement('button');ab.className='add-cell';ab.textContent='+';
-    ab.onclick=e=>{e.stopPropagation();openAdd(ds)};cell.appendChild(ab);
-    grid.appendChild(cell);d.setDate(d.getDate()+1);
+async function saveTask(){
+  const name=document.getElementById('t-name').value.trim();
+  if(!name){toast('⚠️ กรุณาใส่ชื่องาน');return;}
+  const type=document.getElementById('t-type').value;
+  const typeOther=type==='other'?document.getElementById('t-other').value.trim():'';
+  const deadline=document.getElementById('t-deadline').value;
+  const task={name,type,typeOther,deadline,done:'false'};
+  const btn=document.querySelector('#task-overlay .btn-primary');
+  btn.textContent='บันทึก...';btn.disabled=true;
+  const result=await apiCall('POST',{action:'addTask',task});
+  btn.textContent='บันทึก';btn.disabled=false;
+  if(result&&result.success){
+    tasks.push({...task,id:result.id});
+    renderTasks();
+    closeTaskModal();
+    toast('✓ เพิ่มงานแล้ว');
   }
 }
+
+async function deleteTaskFromModal(){
+  if(!taskEditId||!confirm('ลบงานนี้ใช่ไหม?')) return;
+  const result=await apiCall('POST',{action:'deleteTask',id:taskEditId});
+  if(result&&result.success){closeTaskModal();tasks=tasks.filter(t=>t.id!==taskEditId);renderTasks();toast('ลบงานแล้ว');}
+}
+
+/* ── CONTENT MODAL ── */
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
 
 function openAdd(ds){
   editId=null;document.getElementById('modal-title').textContent='เพิ่มคอนเทนต์';
@@ -550,36 +628,66 @@ function openEdit(post){
   document.getElementById('overlay').classList.add('open');
 }
 
-function closeModal(){document.getElementById('overlay').classList.remove('open')}
-
 async function savePost(){
   const name=document.getElementById('f-name').value.trim();
-  if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return}
+  if(!name){toast('⚠️ กรุณาใส่ชื่อคอนเทนต์');return;}
   const selPlats=[...document.querySelectorAll('#f-platforms input:checked')].map(cb=>cb.value);
-  if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return}
+  if(!selPlats.length){toast('⚠️ กรุณาเลือก Platform');return;}
   const media=document.querySelector('input[name="f-media"]:checked')?.value||'video';
   const post={name,type:document.getElementById('f-type').value,media,platform:selPlats.join(','),date:document.getElementById('f-date').value,status:document.getElementById('f-status').value,note:document.getElementById('f-note').value.trim()};
   const btn=document.getElementById('save-btn');btn.textContent='บันทึก...';btn.disabled=true;
   const result=editId?await apiCall('POST',{action:'updatePost',id:editId,post}):await apiCall('POST',{action:'addPost',post});
   btn.textContent='บันทึก';btn.disabled=false;
-  if(result&&result.success){closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');await loadPosts()}
+  if(result&&result.success){closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');await loadPosts();}
 }
 
 async function deletePost(){
   if(!editId||!confirm('ต้องการลบคอนเทนต์นี้ใช่ไหม?'))return;
   const result=await apiCall('POST',{action:'deletePost',id:editId});
-  if(result&&result.success){closeModal();toast('ลบเรียบร้อย');await loadPosts()}
+  if(result&&result.success){closeModal();toast('ลบเรียบร้อย');await loadPosts();}
 }
 
 document.getElementById('save-btn').onclick=savePost;
 document.getElementById('cancel-btn').onclick=closeModal;
 document.getElementById('delete-btn').onclick=deletePost;
-document.getElementById('overlay').onclick=e=>{if(e.target===e.currentTarget)closeModal()};
-document.getElementById('prev').onclick=()=>{cur.setMonth(cur.getMonth()-1);render()};
-document.getElementById('next').onclick=()=>{cur.setMonth(cur.getMonth()+1);render()};
+document.getElementById('overlay').onclick=e=>{if(e.target===e.currentTarget)closeModal();};
+document.getElementById('task-overlay').onclick=e=>{if(e.target===e.currentTarget)closeTaskModal();};
+document.getElementById('prev').onclick=()=>{cur.setMonth(cur.getMonth()-1);render();};
+document.getElementById('next').onclick=()=>{cur.setMonth(cur.getMonth()+1);render();};
 document.getElementById('filters').querySelectorAll('.f-btn').forEach(btn=>{
-  btn.onclick=()=>{filter=btn.dataset.p;document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()};
+  btn.onclick=()=>{filter=btn.dataset.p;document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();};
 });
+
+function render(){
+  document.getElementById('month-lbl').textContent=MONTHS[cur.getMonth()]+' '+(cur.getFullYear()+543);
+  const grid=document.getElementById('cal-grid');grid.innerHTML='';
+  const first=new Date(cur.getFullYear(),cur.getMonth(),1),last=new Date(cur.getFullYear(),cur.getMonth()+1,0);
+  let start=new Date(first);start.setDate(start.getDate()-first.getDay());
+  let end=new Date(last);end.setDate(end.getDate()+(6-last.getDay()));
+  let d=new Date(start);
+  while(d<=end){
+    const ds=fmt(d),cell=document.createElement('div');
+    cell.className='cell'+(d.getMonth()!==cur.getMonth()?' other':'')+(fmt(d)===fmt(today)?' today':'');
+    const dn=document.createElement('div');dn.className='dnum';dn.textContent=d.getDate();cell.appendChild(dn);
+    posts.filter(p=>{
+      if(filter==='all') return p.date===ds;
+      return p.date===ds&&(p.platform||'').split(',').includes(filter);
+    }).forEach(p=>{
+      const firstPlat=(p.platform||'fb').split(',')[0];
+      const chip=document.createElement('button');
+      chip.className='chip '+firstPlat+(p.status==='draft'?' draft':'');
+      const icons=(p.platform||'fb').split(',').map(pl2=>PLAT[pl2]?`<img src="${pl2==='tk'?'tt':pl2}.png" style="width:12px;height:12px;object-fit:contain;vertical-align:middle">`:'').join('');
+      const typeLabel=p.type?`<span class="chip-tag">${TLBL[p.type]||p.type}</span>`:'';
+      const mediaLabel=p.media?`<span class="chip-tag">${MLBL[p.media]||''}</span>`:'';
+      chip.innerHTML=`<div class="chip-row1">${icons}${typeLabel}</div><div class="chip-row2"><span class="chip-name">${p.name}</span>${mediaLabel}</div>`;
+      chip.title=p.note||p.name;
+      chip.onclick=e=>{e.stopPropagation();openEdit(p);};cell.appendChild(chip);
+    });
+    const ab=document.createElement('button');ab.className='add-cell';ab.textContent='+';
+    ab.onclick=e=>{e.stopPropagation();openAdd(ds);};cell.appendChild(ab);
+    grid.appendChild(cell);d.setDate(d.getDate()+1);
+  }
+}
 
 loadPosts();
 loadTasks();
