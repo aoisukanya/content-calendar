@@ -809,13 +809,9 @@ async function saveTask(){
     result=await apiCall('POST',{action:'addTask',task});
   }
   btn.textContent='บันทึก';btn.disabled=false;
-  if(result&&result.success){
-    closeTaskModal();
-    toast(taskEditId?'✓ แก้ไขงานแล้ว':'✓ เพิ่มงานแล้ว');
-    if(taskEditId){const idx=tasks.findIndex(t=>t.id===taskEditId);if(idx>-1)tasks[idx]={...tasks[idx],...task,id:taskEditId};}
-    else tasks.push({...task,id:result.id});
-    renderTasks();renderTasksFull();
-  }
+  closeTaskModal();
+  toast(taskEditId?'✓ แก้ไขงานแล้ว':'✓ เพิ่มงานแล้ว');
+  setTimeout(()=>loadTasks(),1500);
 }
 
 async function deleteTaskFromModal(){
@@ -867,13 +863,15 @@ async function savePost(){
   const btn=document.getElementById('save-btn');btn.textContent='บันทึก...';btn.disabled=true;
   const result=editId?await apiCall('POST',{action:'updatePost',id:editId,post}):await apiCall('POST',{action:'addPost',post});
   btn.textContent='บันทึก';btn.disabled=false;
-  if(result&&result.success){closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');await loadPosts();}
+  closeModal();toast(editId?'✓ แก้ไขเรียบร้อย':'✓ เพิ่มคอนเทนต์แล้ว');
+  setTimeout(()=>loadPosts(),1500);
 }
 
 async function deletePost(){
   if(!editId||!confirm('ต้องการลบคอนเทนต์นี้ใช่ไหม?')) return;
   const result=await apiCall('POST',{action:'deletePost',id:editId});
-  if(result&&result.success){closeModal();toast('ลบเรียบร้อย');await loadPosts();}
+  closeModal();toast('ลบเรียบร้อย');
+  setTimeout(()=>loadPosts(),1500);
 }
 
 document.getElementById('save-btn').onclick=savePost;
